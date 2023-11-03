@@ -1,11 +1,4 @@
 <?php
-//Pinta el pie de página HTML
-function pie()
-{
-    echo "</body>
-	</html>";
-}
-
 //Función que sustituye las vocales con tilde por la misma sin tildes
 function sinTildes($frase)
 {
