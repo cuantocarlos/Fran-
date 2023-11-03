@@ -1,4 +1,4 @@
-<?
+<?php
 function cabecera($titulo="") // el archivo actual
 {
 ?>
