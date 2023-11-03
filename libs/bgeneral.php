@@ -1,18 +1,35 @@
 <?php
+//Pinta la cabecera HTML
+function cabecera($titulo=NULL) // el archivo actual
+{
+    if (is_null($titulo)) {
+        $titulo = basename(__FILE__);
+    }
+    ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>
+				<?php
+    echo $titulo;
+    ?>
+			
+			</title>
+<meta charset="utf-8" />
+</head>
+<body>
+<?php
+}
 
-//***** Funciones de sanitización **** //
+//Pinta el pie de página HTML
+function pie()
+{
+    echo "</body>
+	</html>";
+}
 
-
-/**
- * funcion sinTildes
- *
- * Elimina caracteres con tilde de las cadenas
- * 
- * @param string $frase
- * @return string
- */
-
-function sinTildes($frase):string
+//Función que sustituye las vocales con tilde por la misma sin tildes
+function sinTildes($frase)
 {
     $no_permitidas = array(
         "á",
@@ -62,33 +79,16 @@ function sinTildes($frase):string
     return $texto;
 }
 
-/**
- * Funcion sinEspacios
- * 
- * Elimina los espacios de una cadena de texto
- * 
- * @param string $frase
- * @param string $espacio
- * @return string
- */
-
+//Función que elimina los espacios sobrantes, 
+//al inicio de la cadena y más de uno en los caracteres intermedios
 function sinEspacios($frase)
 {
     $texto = trim(preg_replace('/ +/', ' ', $frase));
     return $texto;
 }
 
-
-/**
- * Funcion recoge
- * 
- * Sanitiza cadenas de texto
- * 
- * @param string $var
- * @return string
- */
-
-function recoge(string $var)
+//Función que sanitiza la información. Además si no existe el control lo pone a ""
+function recoge($var)
 {
     if (isset($_REQUEST[$var])&&(!is_array($_REQUEST[$var]))){
         $tmp=sinEspacios($_REQUEST[$var]);
@@ -99,138 +99,56 @@ function recoge(string $var)
 
     return $tmp;
 }
+/*
+Función que permite validar cadenas de texto.
+Le pasamos cadena, nombre de campo y array de errores y 
+de manera voluntaria mínimo y máximo de caracteres (si = sería campo no requerido) , 
+si permitimos o no espacios en nuestra cadena y si la cadena es o no sensible a mayúsculas
+*/
 
-/**
- * Funcion recogeArray
- * 
- * Sanitiza arrays
- * 
- * @param string $var
- * @return array
- */
-
-function recogeArray(string $var):array
+function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE)
 {
-    $array=[];
-    if (isset($_REQUEST[$var])&&(is_array($_REQUEST[$var]))){
-        foreach($_REQUEST[$var] as $valor)
-        $array[]=strip_tags(sinEspacios($valor));
-        
-    }
-    
-    return $array;
+$case=($case===TRUE)?"i":"";
+$espacios=($espacios===TRUE)?" ":"";
+if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
+    return true;
 }
-   
+$errores[$campo] = "Error en el campo $campo";
+ return false;
+}
 
+/*
+Función que valida una cadena que contiene sólo números.
+Además valida si el campo es o no requerido y el valor máximo
+*/
+function cNum(string $num, string $campo, array &$errores, bool $requerido=TRUE, int $max=PHP_INT_MAX)
+{   $cuantificador= ($requerido)?"+":"*";
+        if ((preg_match("/^[0-9]".$cuantificador."$/", $num))&&($num<=$max) ) {
 
-//***** Funciones de validación **** //
-
-/**
- * Funcion cTexto
- *
- * Valida una cadena de texto con respecto a una RegEx. Reporta error en un array.
- * 
- * @param string $text
- * @param string $campo
- * @param array $errores
- * @param integer $min
- * @param integer $max
- * @param bool $espacios
- * @param bool $case
- * @return bool
- */
-
-
-function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE):bool
-{
-    $case=($case===TRUE)?"i":"";
-    $espacios=($espacios===TRUE)?" ":"";
-    if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
         return true;
     }
     $errores[$campo] = "Error en el campo $campo";
-     return false;
-}
-    
-//***** Funciones de validación **** //
-
-/**
- * Funcion cNum
- *
- * Valida que un string sea numerico menor o igual que un número y si es o no requerido
- * 
- * @param string $text
- * @param string $campo
- * @param array $errores
- * @param bool $requerido
- * @param integer $max
- * @return bool
- */    
-function cNum(string $num, string $campo, array &$errores, bool $requerido=TRUE, int $max=PHP_INT_MAX):bool
-{   $cuantificador= ($requerido)?"+":"*";
-            if ((preg_match("/^[0-9]".$cuantificador."$/", $num))) {
-    
-            if ($num<=$max) return true;
-        }
-        $errores[$campo] = "Error en el campo $campo";
-        return false;
+    return false;
 }
 
-/**
- * Funcion cRadio
- *
- * Valida que un string se encuentre entre los valores posibles.
- * 
- * @param string $text
- * @param string $campo
- * @param array $errores
- * @param array $valores
- * @param bool $requerido
- * 
- * @return boolean
- */
+/*
+Función que valida el dato recogido en un control radio.
+La validación la hace de acuerdo con los datos posibles que pasamos por un array
+Validamos también si el campo es o no requerido
+*/
+
 function cRadio (string $text, string $campo, array &$errores, array $valores, bool $requerido=TRUE)
 {
-        if (in_array($text, $valores)){
-                return true;
-            }
         if (!$requerido && $text==""){
         return true;
         }
+        if (in_array($text, $valores)){
+                return true;
+            }
+        
         $errores[$campo] = "Error en el campo $campo";
         return false;
 
 
-}
-
-/**
- * Funcion cCheck
- *
- * Valida que los valores seleccionado en un checkbox array están dentro de los 
- * valores válidos dados en un array
- * 
- * @param array $text
- * @param string $campo
- * @param array $errores
- * @param array $valores
- * @param bool $requerido
- * 
- * @return boolean
- */
-
-function cCheck (array $text, string $campo, array &$errores, array $valores, bool $requerido=TRUE)
-{
-    if (($requerido) && (count($text)===0)){
-            $errores[$campo] = "Error en el campo $campo";
-            return false;
-    }
-    foreach ($text as $valor){
-        if (!in_array($valor, $valores)){
-            $errores[$campo] = "Error en el campo $campo";
-            return false;
-        }
-        
-    }
-    return true;
 }
 ?>
