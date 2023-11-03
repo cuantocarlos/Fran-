@@ -18,11 +18,9 @@
 
     <!--Seleccion de idioma preferente-->
     <label for="idioma" ></label>
-    <select name="idioma" id="idioma">
-        <option value="es" <?php if ($idioma == "es") echo "selected"; ?>>Español</option>
-        <option value="val" <?php if ($idioma == "val") echo "selected"; ?>>Valencià</option>
-        <option value="en" <?php if ($idioma == "en") echo "selected"; ?>>English</option>
-    </select>
+    <?php
+    $idiomas = ['es','en','cat','fr']
+    ?>
     <!--Descripcion personal-->
     <label for="descripcion">Descripcion</label>
     <textarea name="descripcion" id="descripcion" cols="30" rows="10"><?php echo $descripcion; ?></textarea>
