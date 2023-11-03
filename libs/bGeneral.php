@@ -1,7 +1,4 @@
 <?php
-//Pinta la cabecera HTML
-
-
 //Pinta el pie de página HTML
 function pie()
 {
@@ -12,55 +9,13 @@ function pie()
 //Función que sustituye las vocales con tilde por la misma sin tildes
 function sinTildes($frase)
 {
-    $no_permitidas = array(
-        "á",
-        "é",
-        "í",
-        "ó",
-        "ú",
-        "Á",
-        "É",
-        "Í",
-        "Ó",
-        "Ú",
-        "à",
-        "è",
-        "ì",
-        "ò",
-        "ù",
-        "À",
-        "È",
-        "Ì",
-        "Ò",
-        "Ù"
-    );
-    $permitidas = array(
-        "a",
-        "e",
-        "i",
-        "o",
-        "u",
-        "A",
-        "E",
-        "I",
-        "O",
-        "U",
-        "a",
-        "e",
-        "i",
-        "o",
-        "u",
-        "A",
-        "E",
-        "I",
-        "O",
-        "U"
-    );
+    $no_permitidas = array("á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú", "à", "è", "ì", "ò", "ù", "À", "È", "Ì", "Ò", "Ù");
+    $permitidas = array("a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "a", "e", "i", "o", "u", "A", "E", "I", "O", "U");
     $texto = str_replace($no_permitidas, $permitidas, $frase);
     return $texto;
 }
 
-//Función que elimina los espacios sobrantes, 
+//Función que elimina los espacios sobrantes,
 //al inicio de la cadena y más de uno en los caracteres intermedios
 function sinEspacios($frase)
 {
@@ -71,40 +26,40 @@ function sinEspacios($frase)
 //Función que sanitiza la información. Además si no existe el control lo pone a ""
 function recoge($var)
 {
-    if (isset($_REQUEST[$var])&&(!is_array($_REQUEST[$var]))){
-        $tmp=sinEspacios($_REQUEST[$var]);
+    if (isset($_REQUEST[$var]) && (!is_array($_REQUEST[$var]))) {
+        $tmp = sinEspacios($_REQUEST[$var]);
         $tmp = strip_tags($tmp);
-    }
-    else
+    } else {
         $tmp = "";
+    }
 
     return $tmp;
 }
 /*
 Función que permite validar cadenas de texto.
-Le pasamos cadena, nombre de campo y array de errores y 
-de manera voluntaria mínimo y máximo de caracteres (si = sería campo no requerido) , 
+Le pasamos cadena, nombre de campo y array de errores y
+de manera voluntaria mínimo y máximo de caracteres (si = sería campo no requerido) ,
 si permitimos o no espacios en nuestra cadena y si la cadena es o no sensible a mayúsculas
-*/
+ */
 
-function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE)
+function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = true, bool $case = true)
 {
-$case=($case===TRUE)?"i":"";
-$espacios=($espacios===TRUE)?" ":"";
-if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
-    return true;
-}
-$errores[$campo] = "Error en el campo $campo";
- return false;
+    $case = ($case === true) ? "i" : "";
+    $espacios = ($espacios === true) ? " " : "";
+    if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
 }
 
 /*
 Función que valida una cadena que contiene sólo números.
 Además valida si el campo es o no requerido y el valor máximo
-*/
-function cNum(string $num, string $campo, array &$errores, bool $requerido=TRUE, int $max=PHP_INT_MAX)
-{   $cuantificador= ($requerido)?"+":"*";
-        if ((preg_match("/^[0-9]".$cuantificador."$/", $num))&&($num<=$max) ) {
+ */
+function cNum(string $num, string $campo, array &$errores, bool $requerido = true, int $max = PHP_INT_MAX)
+{$cuantificador = ($requerido) ? "+" : "*";
+    if ((preg_match("/^[0-9]" . $cuantificador . "$/", $num)) && ($num <= $max)) {
 
         return true;
     }
@@ -116,22 +71,22 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido=TRUE,
 Función que valida el dato recogido en un control radio.
 La validación la hace de acuerdo con los datos posibles que pasamos por un array
 Validamos también si el campo es o no requerido
-*/
+ */
 
-function cRadio (string $text, string $campo, array &$errores, array $valores, bool $requerido=TRUE)
+function cRadio(string $text, string $campo, array &$errores, array $valores, bool $requerido = true)
 {
-        if (!$requerido && $text==""){
+    if (!$requerido && $text == "") {
         return true;
-        }
-        if (in_array($text, $valores)){
-                return true;
-            }
-        
-        $errores[$campo] = "Error en el campo $campo";
-        return false;
+    }
+    if (in_array($text, $valores)) {
+        return true;
+    }
 
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
 
 }
+
 function cEmail(string $email, string $campo, array &$errores)
 {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -140,4 +95,3 @@ function cEmail(string $email, string $campo, array &$errores)
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
-?>
