@@ -17,8 +17,8 @@
     pintaSelect($categorias,"categorias");
     ?>
     <br>
-	Descripción: <textarea NAME="desc_servicio" rows="10" cols="20">Escribe aquí tu descripcion...</textarea><br>
-    Tipos:
+	Descripción:<br> <textarea NAME="desc_servicio" rows="10" cols="20">Escribe aquí tu descripcion...</textarea><br>
+    Tipos:<br>
     <?php
     $tipos = ["Intercambio","Pago"];
     pintaRadio($tipos,"tipos");
@@ -26,7 +26,7 @@
     <br>
     <!-- Falta añadir el precio_por_hora -->
     Ubicacion: <input TYPE="text" NAME="ubicacion" VALUE=""/><br>
-    Disponibilidad:
+    Disponibilidad:<br>
     <?php
     $disponibilidades = ["Mañanas","Tardes","Noches","Completa","Fines de semana"];
     pintaCheck($disponibilidades,"disponibilidad");
