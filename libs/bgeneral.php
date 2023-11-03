@@ -151,4 +151,12 @@ function cRadio (string $text, string $campo, array &$errores, array $valores, b
 
 
 }
+function cEmail(string $email, string $campo, array &$errores)
+{
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
 ?>
