@@ -16,7 +16,7 @@ function pintaCheck(array $array, string $grupo){
 function pintaSelect(array $array, string $grupo){
     echo "<select name=\"$grupo\">";
     for($i = 0; $i < count($array); $i++){
-        echo "<option value=\"$grupo[$i]\">$grupo[$i]</option>";
+        echo "<option value=\"$array[$i]\">$array[$i]</option>";
     }
     echo "</select>";
 
