@@ -1,32 +1,4 @@
 <?php
-//Pinta la cabecera HTML
-function cabecera($titulo=NULL) // el archivo actual
-{
-    if (is_null($titulo)) {
-        $titulo = basename(__FILE__);
-    }
-    ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<title>
-				<?php
-    echo $titulo;
-    ?>
-			
-			</title>
-<meta charset="utf-8" />
-</head>
-<body>
-<?php
-}
-
-//Pinta el pie de página HTML
-function pie()
-{
-    echo "</body>
-	</html>";
-}
 
 //Función que sustituye las vocales con tilde por la misma sin tildes
 function sinTildes($frase)
