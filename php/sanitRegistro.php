@@ -17,7 +17,7 @@ $desc_personal = "";
 if (!isset($_REQUEST["bAceptar"])) {
 
     //Sino se ha pulsado, incluyo el formulario
-    include("../templates/registro.php");
+    include("../templates/formRegistro.php");
 
 } // Si se ha pulsado procesamos los datos recibidos
 else {
@@ -53,7 +53,7 @@ else {
         header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
     } else {
         //Volvemos a mostrar el formulario con errores
-        include("../templates/registro.php");
+        include("../templates/formRegistro.php");
     }
 }
 ?>
