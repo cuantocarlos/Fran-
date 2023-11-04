@@ -28,6 +28,19 @@ function recoge($var)
 
     return $tmp;
 }
+
+function recogeArray(string $var): array
+{
+    $array = [];
+    if (isset($_REQUEST[$var]) && (is_array($_REQUEST[$var]))) {
+        foreach ($_REQUEST[$var] as $valor)
+            $array[] = strip_tags(sinEspacios($valor));
+    }
+
+    return $array;
+}
+
+
 /*
 Función que permite validar cadenas de texto.
 Le pasamos cadena, nombre de campo y array de errores y
@@ -79,7 +92,19 @@ function cRadio(string $text, string $campo, array &$errores, array $valores, bo
     return false;
 
 }
+function cSelect(string $text, string $campo, array &$errores, array $valores, bool $requerido = true)
+{
+    if (!$requerido && $text == "") {
+        return true;
+    }
+    if (in_array($text, $valores)) {
+        return true;
+    }
 
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+
+}
 function cEmail(string $email, string $campo, array &$errores)
 {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {

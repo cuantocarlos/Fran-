@@ -1,4 +1,2 @@
-<?php
-include("../libs/bcomponentes.php");
-include("../templates/altaServicio.php");
-?>
+
+<?php echo exec('whoami'); ?>
