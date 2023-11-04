@@ -17,14 +17,14 @@ $desc_personal = "";
 if (!isset($_REQUEST["bAceptar"])) {
 
     //Sino se ha pulsado, incluyo el formulario
-    include("./templates/registro.php");
+    include("../templates/registro.php");
 
 } // Si se ha pulsado procesamos los datos recibidos
 else {
     //Sanitizamos
     $nombre = recoge("nombre");
     $correo = recoge("correo");
-    $passw = recoge("passwd");
+    $passw = recoge("passw");
     $fecha_de_nacimiento = recoge("fecha_de_nacimiento");
     $idiomas = recoge("idiomas");
     $desc_personal = recoge("desc_personal");
@@ -33,12 +33,24 @@ else {
     cTexto($nombre,"nombre",$errores,);
     cEmail($correo,"correo",$errores);
     cTexto($passw,"contraseña",$errores);
-    validaFechadma($fecha_de_nacimiento,$errores);
+    validaFechaamd($fecha_de_nacimiento,$errores);
     cSelect($idiomas,"idioma",$errores,$idiomasValidas);
     cTexto($desc_personal,"descripción personal",$errores);
+
+    if (empty($errores)) {
+        /**
+         * En este caso la subida del fichero es obligatoria
+         **/
+        $img = cfile("img_perfil",  $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
+        
+        /**
+         * Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
+         * Si ha habido error volveremos a mostrar el formulario
+         **/
+    }
     //Sino se han encontrado errores pasamos a otra página
     if (empty($errores)) {
-        header("location:validRegistro.php?nombre=$nombre&correo=$correo&pass=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal");
+        header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
     } else {
         //Volvemos a mostrar el formulario con errores
         include("../templates/registro.php");
