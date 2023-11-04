@@ -1,6 +1,6 @@
 <?php
 
-include("cabecera.php");
+include "cabecera.php";
 
 foreach ($errores as $error) {
     echo $error . "<br>";
@@ -11,18 +11,18 @@ foreach ($errores as $error) {
 <form method="post" action="" enctype="multipart/form-data">
     <br>
     Email:
-    <input type="email" name="correo" value="<?= isset($correo) ? $correo : ""; ?>">
+    <input type="email" name="correo" value="<?=isset($correo) ? $correo : "";?>">
     <br>
     <?php
-    echo (isset($errores['correo'])) ? "$errores[correo] <br>" : "";
-    ?>
+echo (isset($errores['correo'])) ? "$errores[correo] <br>" : "";
+?>
     Contraseña:
-    <input type="password" name="contrasenya" value="<?= isset($contrasenya) ? $contrasenya : ""; ?>">
+    <input type="password" name="contrasenya" value="<?=isset($contrasenya) ? $contrasenya : "";?>">
     <br>
     <input type="submit" name="bAceptar" value="Entrar"/>
     <br>
 </form>
 
 <?php
-include("pie.php");
+include "pie.php";
 ?>

@@ -33,13 +33,14 @@ function recogeArray(string $var): array
 {
     $array = [];
     if (isset($_REQUEST[$var]) && (is_array($_REQUEST[$var]))) {
-        foreach ($_REQUEST[$var] as $valor)
+        foreach ($_REQUEST[$var] as $valor) {
             $array[] = strip_tags(sinEspacios($valor));
+        }
+
     }
 
     return $array;
 }
-
 
 /*
 Función que permite validar cadenas de texto.
@@ -90,66 +91,7 @@ function cRadio(string $text, string $campo, array &$errores, array $valores, bo
 
     $errores[$campo] = "Error en el campo $campo";
     return false;
-
 }
-function cSelect(string $text, string $campo, array &$errores, array $valores, bool $requerido = true)
-{
-    if (!$requerido && $text == "") {
-        return true;
-    }
-    if (in_array($text, $valores)) {
-        return true;
-    }
-
-    $errores[$campo] = "Error en el campo $campo";
-    return false;
-
-}
-function cEmail(string $email, string $campo, array &$errores)
-{
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
-    }
-    $errores[$campo] = "Error en el campo $campo";
-    return false;
-}
-
-function cPass(string $contrasenya, string $campo, array &$errores, int $min = 10, int $max = 150) {
-    if (strlen($contrasenya) < $min || strlen($contrasenya) > $max) {
-        $errores[$campo] = "Error en el campo $campo: la contraseña debe tener entre $min y $max caracteres.";
-        return false;
-    }
-
-    if (!preg_match('/[A-ZÑÇ]/', $contrasenya) || !preg_match('/[a-zñç]/', $contrasenya)) {
-        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos una letra mayúscula y una letra minúscula.";
-        return false;
-    }
-
-    if (!preg_match('/\d/', $contrasenya)) {
-        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos un número.";
-        return false;
-    }
-
-    if (!preg_match('/[^A-Za-z\d]/', $contrasenya)) {
-        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos un carácter especial.";
-        return false;
-    }
-
-    return true;
-}
-function ValidaFechaamd($fecha,&$errores)
-{
-    $fechaArray = explode("-", $fecha);
-    if ((count($fechaArray) == 3)&& (checkdate($fechaArray[1], $fechaArray[2], $fechaArray[0]))){
-       
-        
-        return mktime($fechaArray[1], $fechaArray[2], $fechaArray[0]);
-    } else {
-        $errores["fecha"]="La fecha no es válida";
-        return false;
-    }
-}
-
 
 /**
  * Funcion cFile
@@ -239,5 +181,63 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
                 return false;
             }
         }
+    }
+}
+function cSelect(string $text, string $campo, array &$errores, array $valores, bool $requerido = true)
+{
+    if (!$requerido && $text == "") {
+        return true;
+    }
+    if (in_array($text, $valores)) {
+        return true;
+    }
+
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+
+}
+function cEmail(string $email, string $campo, array &$errores)
+{
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+
+function cPass(string $contrasenya, string $campo, array &$errores, int $min = 10, int $max = 150)
+{
+    if (strlen($contrasenya) < $min || strlen($contrasenya) > $max) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe tener entre $min y $max caracteres.";
+        return false;
+    }
+
+    if (!preg_match('/[A-ZÑÇ]/', $contrasenya) || !preg_match('/[a-zñç]/', $contrasenya)) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos una letra mayúscula y una letra minúscula.";
+        return false;
+    }
+
+    if (!preg_match('/\d/', $contrasenya)) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos un número.";
+        return false;
+    }
+
+    if (!preg_match('/[^A-Za-z\d]/', $contrasenya)) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos un carácter especial.";
+        return false;
+    }
+
+    return true;
+}
+
+function ValidaFechaamd($fecha, &$errores)
+{
+    $fechaArray = explode("-", $fecha);
+    if ((count($fechaArray) == 3) && (checkdate($fechaArray[1], $fechaArray[2], $fechaArray[0]))) {
+
+        return mktime($fechaArray[1], $fechaArray[2], $fechaArray[0]);
+    } else {
+        $errores["fecha"] = "La fecha no es válida";
+        return false;
     }
 }
