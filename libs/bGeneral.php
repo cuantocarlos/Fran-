@@ -137,6 +137,18 @@ function cPass(string $contrasenya, string $campo, array &$errores, int $min = 1
 
     return true;
 }
+function ValidaFechaamd($fecha,&$errores)
+{
+    $fechaArray = explode("-", $fecha);
+    if ((count($fechaArray) == 3)&& (checkdate($fechaArray[1], $fechaArray[2], $fechaArray[0]))){
+       
+        
+        return mktime($fechaArray[1], $fechaArray[2], $fechaArray[0]);
+    } else {
+        $errores["fecha"]="La fecha no es válida";
+        return false;
+    }
+}
 
 
 /**
