@@ -89,6 +89,31 @@ function cEmail(string $email, string $campo, array &$errores)
     return false;
 }
 
+function cPass(string $contrasenya, string $campo, array &$errores, int $min = 10, int $max = 150) {
+    if (strlen($contrasenya) < $min || strlen($contrasenya) > $max) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe tener entre $min y $max caracteres.";
+        return false;
+    }
+
+    if (!preg_match('/[A-ZÑÇ]/', $contrasenya) || !preg_match('/[a-zñç]/', $contrasenya)) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos una letra mayúscula y una letra minúscula.";
+        return false;
+    }
+
+    if (!preg_match('/\d/', $contrasenya)) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos un número.";
+        return false;
+    }
+
+    if (!preg_match('/[^A-Za-z\d]/', $contrasenya)) {
+        $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos un carácter especial.";
+        return false;
+    }
+
+    return true;
+}
+
+
 /**
  * Funcion cFile
  *
