@@ -15,9 +15,13 @@ if (!isset($_REQUEST['bAceptar'])){
     //Si no se ha pulsado, incluyo el formulario
     include 'formPerfilUsuario.php';
 
-}else{
+}else{//sanitizamos
     //Si el formulario si ha aparecido, procesamos los datos
-    
+    cPass($new_pass,);
+    cFile($img_perfil);
+    cTexto($desc_personal);
+
 }
 
 ?>
+<!--falta idiomas-->
