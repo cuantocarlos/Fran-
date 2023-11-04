@@ -6,15 +6,24 @@
  *
  */
 
-/**
- * Donde almacenaremos las imágenes que nos suben los usuarios
- */
-$rutaImagenes = "imagenes";
+ /**
+  * Donde almacenaremos las imágenes que nos suben los usuarios
+  */
+$rutaImagenes="../img";
 /**
  * Array que guarda las extensiones válidas
  */
-$extensionesValidas = ["jpeg", "gif", "jpg"];
+$extensionesValidas=["jpeg","gif","jpg","png"];
 /**
  * Tamaño máximo del fichero subido. En bytes
  */
-$maxFichero = 300000;
+$maxFichero=300000;
+
+/**
+ * Arrays de posibles valores]
+ */
+$categoriasValidas = ["IT","Fontaneria","Electricidad","Chofer","Traductor"];
+$disponibilidadesValidas = ["Mañanas","Tardes","Noches","Completa","Fines de semana"];
+$idiomasValidas = ["es","en","it","cat","fr"];
+
+?>
