@@ -1,5 +1,5 @@
 <?php
-function cabecera($titulo="") // el archivo actual
+function cabecera($titulo = "") // el archivo actual
 {
     ?>
     <!DOCTYPE html>
@@ -7,7 +7,7 @@ function cabecera($titulo="") // el archivo actual
 
     <head>
         <title>
-            <?= $titulo ?>
+            <?=$titulo?>
         </title>
         <meta charset="utf-8" />
     </head>
