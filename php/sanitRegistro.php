@@ -1,22 +1,22 @@
 <?php
-include ('./libs/bGeneral.php');
+include './libs/bGeneral.php';
 cabecera();
 $error = false;
 
 // array donde almacenaremos el texto de los errores encontrados
-$errores=[];
-$nombre="";
-$correo="";
-$passw="";
-$fecha_de_nacimiento="";
-$img_perfil="";
-$idiomas =[];
-$desc_personal="";
+$errores = [];
+$nombre = "";
+$correo = "";
+$passw = "";
+$fecha_de_nacimiento = "";
+$img_perfil = "";
+$idiomas = [];
+$desc_personal = "";
 //Compruebo si se ha pulsado el botón del formulario
 if (!isset($_REQUEST['bAceptar'])) {
 
 //Sino se ha pulsado, incluyo el formulario
-include ('form.php');
+    include 'form.php';
 
 } // Si se ha pulsado procesamos los datos recibidos
 else {
@@ -24,7 +24,7 @@ else {
     $nombre = recoge("nombre");
     $edad = recoge('edad');
     //Validamos
-    if ((!cTexto($nombre) )) {
+    if ((!cTexto($nombre))) {
         $errores['nombre'] = 'El nombre no es correcto';
         $error = true;
     }
@@ -37,11 +37,11 @@ else {
         header("location:correcto.php?nombre=$nombre&edad=$edad");
     } else {
         //Volvemos a mostrar el formulario con errores
-        include ('form.php');
+        include 'form.php';
     }
 }
 ?>
-		  
+
 
 <?php
 
