@@ -1,6 +1,6 @@
 <?php
 ?>
-<form action="index.php" method="post">
+<form action="index.php" method="post" enctype="multipart/form-data">
     <!--Cambiar contrasenya-->
     <label for="pass">Contrasenya</label>
     <input type="password" name="pass" id="pass" value="<?php echo $pass; ?>">
@@ -17,7 +17,7 @@
     <input type="submit" name="cambiarFoto" value="Cambiar">
 
     <!--Seleccion de idioma preferente-->
-    <label for="idioma" ></label>
+    <label for="idioma" >Idioma preferente</label>
     <?php
     $idiomas = ['es','en','cat','fr']
     ?>
