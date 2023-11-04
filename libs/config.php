@@ -18,4 +18,12 @@ $extensionesValidas=["jpeg","gif","jpg"];
  * Tamaño máximo del fichero subido. En bytes
  */
 $maxFichero=300000;
+
+/**
+ * Arrays de posibles valores]
+ */
+$categoriasValidas = ["IT","Fontaneria","Electricidad","Chofer","Traductor"];
+$disponibilidadesValidas = ["Mañanas","Tardes","Noches","Completa","Fines de semana"];
+$idiomasValidas = ["es","en","it","cat","fr"];
+
 ?>

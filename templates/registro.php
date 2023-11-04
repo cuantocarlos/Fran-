@@ -1,12 +1,15 @@
-<?php include("cabecera.php")?>
+<?php include("cabecera.php"); include("../libs/cComponentes.php");?>
+
 <p>
 	<?php
-		foreach ($errores as $error) {
+	
+    foreach ($errores as $error) {
 			echo "<br>Error: " . $error . "<br>";
 		}
 
 	?>
 </p>
+
 
 
 <form action="" method='post' enctype="multipart/form-data">
