@@ -9,11 +9,11 @@
  /**
   * Donde almacenaremos las imágenes que nos suben los usuarios
   */
-$rutaImagenes="imagenes";
+$rutaImagenes="../img";
 /**
  * Array que guarda las extensiones válidas
  */
-$extensionesValidas=["jpeg","gif","jpg"];
+$extensionesValidas=["jpeg","gif","jpg","png"];
 /**
  * Tamaño máximo del fichero subido. En bytes
  */
