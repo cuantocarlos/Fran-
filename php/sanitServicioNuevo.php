@@ -1,6 +1,6 @@
 <?php
 include("../libs/bGeneral.php");
-include("config.php");
+include("../libs/config.php");
 
 // Array de errores a presentar
 $errores = [];
@@ -30,7 +30,7 @@ else {
     $disponibilidades = recogeArray("disponibilidad");
     
     //Validamos
-    cTexto($nombre, "nombre", $errores);
+    cTexto($servicio, "servicio", $errores);
     cSelect($categoria,"categorias",$errores,$categoriasValidas);
     cTexto($descripcion, "descripcion", $errores);
     cRadio($tipoPago,"tipo de pago",$errores,$tiposValidas);
@@ -50,7 +50,8 @@ else {
     }
     //Sino se han encontrado errores pasamos a otra página
     if (empty($errores)) {
-        header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
+        $disponibilidades = serialize($disponibilidades);
+        header("location:../templates/validAltaServicio.php?servicio=$servicio&categoria=$categoria&descripcion=$descripcion&tipoPago=$tipoPago&ubicacion=$ubicacion&disponibilidad=$disponibilidades&img=$img");
     } else {
         //Volvemos a mostrar el formulario con errores
         include "../templates/altaServicio.php";

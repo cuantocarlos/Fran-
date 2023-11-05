@@ -13,20 +13,20 @@ include('../libs/config.php');
 
 
 <form action="" method='post' enctype="multipart/form-data">
-	Servicio: <input TYPE="text" NAME="servicio" VALUE=""/><br>
+	Servicio: <input TYPE="text" NAME="servicio" VALUE="<?= isset($servicio) ? $servicio : ""; ?>"/><br>
     Categorias: 
     <?php
     pintaSelect($categoriasValidas,"categorias");
     ?>
     <br>
-	Descripción:<br> <textarea NAME="desc_servicio" rows="10" cols="20">Escribe aquí tu descripcion...</textarea><br>
+	Descripción:<br> <textarea NAME="desc_servicio" rows="10" cols="20"><?= isset($descripcion) ? $descripcion : ""; ?>"</textarea><br>
     Tipos:<br>
     <?php
     pintaRadio($tiposValidas,"tipos");
     ?>
     <br>
     <!-- Falta añadir el precio_por_hora -->
-    Ubicacion: <input TYPE="text" NAME="ubicacion" VALUE=""/><br>
+    Ubicacion: <input TYPE="text" NAME="ubicacion" VALUE="<?= isset($ubicacion) ? $ubicacion : ""; ?>"/><br>
     Disponibilidad:<br>
     <?php
     pintaCheck($disponibilidadesValidas,"disponibilidad");
