@@ -1,9 +1,13 @@
+<?php include("../libs/bComponentes.php");?>
+
 <p>
 	<?php
-        foreach ($errores as $error) {
-            echo "<br>Error: " . $error . "<br>";
-        }
-    ?>
+	
+    foreach ($errores as $error) {
+			echo "<br>Error: " . $error . "<br>";
+		}
+
+	?>
 </p>
 <form action="index.php" method="post" enctype="multipart/form-data">
     <!--Cambiar contraseña-->
@@ -26,9 +30,10 @@
         $idiomas = ["es", "en", "it", "cat", "fr"];
         pintaSelect($idiomas, "idiomas");
     ?>
+    <br>
 
     <!--Descripcion personal-->
-    <label for="descripcion">Descripcion personal</label><br>
+    <label for="descripcion">Descripcion personal:</label><br>
     <textarea name="descripcion" id="descripcion" cols="30" rows="10"><?php echo $descripcion; ?></textarea><br>
     <input type="submit" name="cambiarDescripcion" value="Cambiar descripción"><br>
 </form>
