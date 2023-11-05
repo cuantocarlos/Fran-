@@ -1,5 +1,10 @@
-<?php
-?>
+<p>
+	<?php
+        foreach ($errores as $error) {
+            echo "<br>Error: " . $error . "<br>";
+        }
+    ?>
+</p>
 <form action="index.php" method="post" enctype="multipart/form-data">
     <!--Cambiar contraseña-->
     <label for="current_pass">Contraseña actual</label>

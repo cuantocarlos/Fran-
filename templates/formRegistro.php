@@ -26,8 +26,6 @@
     <br>
     Descripción personal: <textarea name="desc_personal" rows="10" cols="20" ><?= isset($desc_personal) ? $desc_personal : ""; ?></textarea><br>
 
-
-
 	<br>
 	<input TYPE="submit" name="bAceptar" VALUE="Registrar">
 </form>
