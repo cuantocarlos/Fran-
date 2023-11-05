@@ -32,7 +32,7 @@ include('../libs/config.php');
     pintaCheck($disponibilidadesValidas,"disponibilidad");
     ?>
     <br>
-    Foto del servicio: <input TYPE="file" name="img_perfil" /><br>
+    Foto del servicio: <input TYPE="file" name="img_servicio" /><br>
 	<input TYPE="submit" name="bAceptar" VALUE="Registrar">
 </form>
 

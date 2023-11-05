@@ -65,7 +65,8 @@ Función que valida una cadena que contiene sólo números.
 Además valida si el campo es o no requerido y el valor máximo
  */
 function cNum(string $num, string $campo, array &$errores, bool $requerido = true, int $max = PHP_INT_MAX)
-{$cuantificador = ($requerido) ? "+" : "*";
+{
+    $cuantificador = ($requerido) ? "+" : "*";
     if ((preg_match("/^[0-9]" . $cuantificador . "$/", $num)) && ($num <= $max)) {
 
         return true;
@@ -196,6 +197,24 @@ function cSelect(string $text, string $campo, array &$errores, array $valores, b
     return false;
 
 }
+function cCheck(array $text, string $campo, array &$errores, array $valores, bool $requerido = true)
+{
+    if (!$requerido && $text == "") {
+        return true;
+    }
+
+    foreach ($text as $t) {
+        if (!in_array($t, $valores)) {
+            $errores[$campo] = "Error en el campo $campo";
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+
 function cEmail(string $email, string $campo, array &$errores)
 {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
