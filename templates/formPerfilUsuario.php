@@ -2,7 +2,7 @@
 ?>
 <form action="index.php" method="post" enctype="multipart/form-data">
     <!--Cambiar contraseña-->
-    <label for="pass">Contraseña actual</label>
+    <label for="current_pass">Contraseña actual</label>
     <input type="password" name="current_pass" id="current_pass"><br>
     <label for="new_pass">Nueva Contraseña</label>
     <input type="password" name="new_pass" id="new_pass"><br>
@@ -18,8 +18,9 @@
     <!--Seleccion de idioma preferente-->
     <label for="idioma" >Idioma preferente</label>
     <?php
-$idiomas = ['es', 'en', 'cat', 'fr']
-?><br>
+        $idiomas = ["es", "en", "it", "cat", "fr"];
+        pintaSelect($idiomas, "idiomas");
+    ?>
 
     <!--Descripcion personal-->
     <label for="descripcion">Descripcion personal</label><br>
@@ -27,4 +28,3 @@ $idiomas = ['es', 'en', 'cat', 'fr']
     <input type="submit" name="cambiarDescripcion" value="Cambiar descripción"><br>
 </form>
 
-<!--El formulario de idioma no sé bien como ponerlo-->
