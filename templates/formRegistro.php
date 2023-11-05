@@ -11,7 +11,7 @@
 </p>
 
 
-
+<h2>Formulario de Registro</h2>
 <form action="" method='post' enctype="multipart/form-data">
 	Nombre: <input TYPE="text" NAME="nombre" VALUE="<?= isset($nombre) ? $nombre : ""; ?>"/><br>
 	Correo: <input TYPE="text" NAME="correo" VALUE="<?= isset($correo) ? $correo : ""; ?>"/><br>
@@ -29,3 +29,4 @@
 	<br>
 	<input TYPE="submit" name="bAceptar" VALUE="Registrar">
 </form>
+<!--hay que quitar los idiomas de ahi, estan en config.php-->

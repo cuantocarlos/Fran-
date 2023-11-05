@@ -38,3 +38,4 @@
     <input type="submit" name="cambiarDescripcion" value="Cambiar descripción"><br>
 </form>
 
+<!--hay que quitar los idiomas de ahi, estan en config.php-->

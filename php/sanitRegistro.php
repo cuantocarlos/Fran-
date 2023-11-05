@@ -2,6 +2,7 @@
 include '../libs/bGeneral.php';
 include "../libs/config.php";
 include "../templates/cabecera.php";
+sesssion_start();
 
 // array donde almacenaremos el texto de los errores encontrados
 $errores = [];
