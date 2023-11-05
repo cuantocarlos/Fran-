@@ -30,12 +30,12 @@ else {
     $desc_personal = recoge("desc_personal");
 
     //Validamos
-    cTexto($nombre, "nombre", $errores, );
+    cTexto($nombre, "nombre", $errores);
     cEmail($correo, "correo", $errores);
-    cTexto($passw, "contraseña", $errores);
+    cPass($passw, "contraeña", $errores);
     validaFechaamd($fecha_de_nacimiento, $errores);
     cSelect($idiomas, "idioma", $errores, $idiomasValidas);
-    cTexto($desc_personal, "descripción personal", $errores);
+    cTexto($desc_personal, "descripción personal", $errores, 140);
 
     if (empty($errores)) {
         /**
