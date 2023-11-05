@@ -11,7 +11,7 @@ cabecera("Perfil de usuario");
 $errores = [];
 $new_pass = "";
 $img_perfil = "";
-$idiomas = [];
+$idioma = [];
 $desc_personal = "";
 
 //Compruebo si se ha pulsado el botón del formulario
@@ -23,17 +23,17 @@ if (!isset($_REQUEST['bAceptar'])) {
     //sanitizamos
     $new_pass = recoge("new_pass");
   
-    $idiomas = recoge("idiomas");
+    $idioma = recoge("idioma");
     $desc_personal = recoge("desc_personal");
     // procesamos validando los datos
     cPass($new_pass, "nueva contraseña", $errores);
-    cSelect($idiomas, "idioma", $errores, $idiomasValidos);
+    cSelect($idioma, "idioma", $errores, $idiomasValidos);
     cTexto($desc_personal,"descripcion personal", $errores);
     if (empty($errores)) {
         $imagenResultado=cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes);
     }
     if (empty($errores)) {
-        header("location:../templates/validPerfilUsuario.php?new_pass=$new_pass&img_perfil=$imagenResultado&idioma=$idiomas&desc_personal=$desc_personal");
+        header("location:../templates/validPerfilUsuario.php?new_pass=$new_pass&img_perfil=$imagenResultado&idioma=$idioma&desc_personal=$desc_personal");
     } else {
         //Volvemos a mostrar el formulario con errores
         include "../templates/formPerfilUsuario.php";

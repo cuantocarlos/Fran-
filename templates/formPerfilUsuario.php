@@ -32,13 +32,13 @@ include("libs/config.php");
     <label for="idioma" >Idioma preferente</label>
     <?php
       
-        pintaSelect($idiomasValidas, "idiomas");
+        pintaSelect($idiomasValidas, "idioma");
     ?>
     <br>
 
     <!--Descripcion personal-->
     <label for="descripcion">Descripcion personal:</label><br>
     <textarea name="descripcion" id="descripcion" cols="30" rows="10"><?php echo $descripcion; ?></textarea><br>
-    <input type="submit" name="cambiarDescripcion" value="Cambiar descripción"><br>
+    <input type="submit" name="bAceptar" value="Cambiar descripción"><br>
 </form>
 
