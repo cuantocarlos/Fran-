@@ -1,4 +1,7 @@
-<?php include("cabecera.php")?>
+<?php include("../libs/bComponentes.php");
+include('../libs/config.php');
+?>
+
 <p>
 	<?php
 		foreach ($errores as $error) {
@@ -10,30 +13,27 @@
 
 
 <form action="" method='post' enctype="multipart/form-data">
-	Servicio: <input TYPE="text" NAME="servicio" VALUE=""/><br>
+	Servicio: <input TYPE="text" NAME="servicio" VALUE="<?= isset($servicio) ? $servicio : ""; ?>"/><br>
     Categorias: 
     <?php
-    $categorias = ["IT","Fontaneria","Electricidad","Chofer","Traductor"];
-    pintaSelect($categorias,"categorias");
+    pintaSelect($categoriasValidas,"categorias");
     ?>
     <br>
-	Descripción:<br> <textarea NAME="desc_servicio" rows="10" cols="20">Escribe aquí tu descripcion...</textarea><br>
+	Descripción:<br> <textarea NAME="desc_servicio" rows="10" cols="20"><?= isset($descripcion) ? $descripcion : ""; ?>"</textarea><br>
     Tipos:<br>
     <?php
-    $tipos = ["Intercambio","Pago"];
-    pintaRadio($tipos,"tipos");
+    pintaRadio($tiposValidas,"tipos");
     ?>
     <br>
     <!-- Falta añadir el precio_por_hora -->
-    Ubicacion: <input TYPE="text" NAME="ubicacion" VALUE=""/><br>
+    Ubicacion: <input TYPE="text" NAME="ubicacion" VALUE="<?= isset($ubicacion) ? $ubicacion : ""; ?>"/><br>
     Disponibilidad:<br>
     <?php
-    $disponibilidades = ["Mañanas","Tardes","Noches","Completa","Fines de semana"];
-    pintaCheck($disponibilidades,"disponibilidad");
+    pintaCheck($disponibilidadesValidas,"disponibilidad");
     ?>
     <br>
-    Foto del servicio: <input TYPE="file" name="img_perfil" /><br>
+    Foto del servicio: <input TYPE="file" name="img_servicio" /><br>
 	<input TYPE="submit" name="bAceptar" VALUE="Registrar">
 </form>
 
-<?php include("pie.php")?>
+
