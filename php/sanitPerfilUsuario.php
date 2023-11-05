@@ -37,7 +37,6 @@ if (!isset($_REQUEST['bAceptar'])) {
     } else {
         //Volvemos a mostrar el formulario con errores
         include "../templates/formPerfilUsuario.php";
-
     }
 
 }

@@ -7,7 +7,8 @@ foreach ($errores as $error) {
 }
 
 ?>
-<h1>Inicio de sesión</h1>
+<h2>Inicio de Sesión</h2>
+
 <form method="post" action="" enctype="multipart/form-data">
     <br>
     Email:
