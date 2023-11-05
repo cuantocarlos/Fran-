@@ -25,4 +25,5 @@ $maxFichero=300000;
 $categoriasValidas = ["IT","Fontaneria","Electricidad","Chofer","Traductor"];
 $disponibilidadesValidas = ["Mañanas","Tardes","Noches","Completa","Fines de semana"];
 $idiomasValidas = ["es","en","it","cat","fr"];
+$tiposValidas = ["Intercambio","Pago"];
 ?>
