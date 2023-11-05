@@ -1,4 +1,7 @@
-<?php include("cabecera.php")?>
+<?php include("templates/cabecera.php");
+include('libs/config.php');
+?>
+
 <p>
 	<?php
 		foreach ($errores as $error) {
