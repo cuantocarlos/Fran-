@@ -9,7 +9,7 @@
  /**
   * Donde almacenaremos las imágenes que nos suben los usuarios
   */
-$rutaImagenes="../img";
+$rutaImagenes="../imgUsuarios/";
 /**
  * Array que guarda las extensiones válidas
  */
