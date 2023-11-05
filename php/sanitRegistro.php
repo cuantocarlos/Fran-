@@ -32,8 +32,8 @@ else {
     //Validamos
     cTexto($nombre, "nombre", $errores);
     cEmail($correo, "correo", $errores);
-    cPass($passw, "contraeña", $errores);
-    validaFechaamd($fecha_de_nacimiento, $errores);
+    cPass($passw, "contraseña", $errores);
+    ValidaFechaamd($fecha_de_nacimiento, $errores);
     cSelect($idiomas, "idioma", $errores, $idiomasValidas);
     cTexto($desc_personal, "descripción personal", $errores, 140);
 
@@ -41,7 +41,7 @@ else {
         /**
          * En este caso la subida del fichero es obligatoria
          **/
-        $img = cfile("img_perfil", $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
+        $img = cFile("img_perfil", $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
 
         /**
          * Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
