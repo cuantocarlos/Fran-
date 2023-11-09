@@ -41,7 +41,7 @@ else {
         /**
          * En este caso la subida del fichero es obligatoria
          **/
-        $img = cFile("img_servicio", $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
+        $img = cFile("img_servicio", $errores, $extensionesValidas, $rutaImagenes, $maxFichero, FALSE);
 
         /**
          * Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
@@ -50,6 +50,26 @@ else {
     }
     //Sino se han encontrado errores pasamos a otra página
     if (empty($errores)) {
+        
+        /**
+         * Antes de pasar al documento con los datos validados, registramos el servicio en servicios.txt
+         */
+        if($file = fopen("../assets/txt/servicios.txt","a+")){
+            fwrite($file,"Servicio:$servicio".PHP_EOL);
+            fwrite($file,"Categoria:$categoria".PHP_EOL);
+            fwrite($file,"Descripcion:$descripcion".PHP_EOL);
+            fwrite($file,"Tipo de pago:$tipoPago".PHP_EOL);
+            fwrite($file,"Ubicacion:$ubicacion".PHP_EOL);
+            fwrite($file,"Disponibilidades:");
+            foreach($disponibilidades as $d){
+                fwrite($file," $d ");
+            }
+            fwrite($file,"".PHP_EOL);
+            fwrite($file,"Img:$img".PHP_EOL);
+            fwrite($file,"------".PHP_EOL);
+            fclose($file);
+        }
+        
         $disponibilidades = serialize($disponibilidades);
         header("location:../templates/validAltaServicio.php?servicio=$servicio&categoria=$categoria&descripcion=$descripcion&tipoPago=$tipoPago&ubicacion=$ubicacion&disponibilidad=$disponibilidades&img=$img");
     } else {
