@@ -1,4 +1,8 @@
-<?php include("../libs/bComponentes.php");?>
+<?php 
+include("../libs/bComponentes.php");
+include("libs/config.php");
+?>
+
 
 <p>
 	<?php
@@ -27,15 +31,14 @@
     <!--Seleccion de idioma preferente-->
     <label for="idioma" >Idioma preferente</label>
     <?php
-        $idiomas = ["es", "en", "it", "cat", "fr"];
-        pintaSelect($idiomas, "idiomas");
+      
+        pintaSelect($idiomasValidas, "idioma");
     ?>
     <br>
 
     <!--Descripcion personal-->
     <label for="descripcion">Descripcion personal:</label><br>
     <textarea name="descripcion" id="descripcion" cols="30" rows="10"><?php echo $descripcion; ?></textarea><br>
-    <input type="submit" name="cambiarDescripcion" value="Cambiar descripción"><br>
+    <input type="submit" name="bAceptar" value="Cambiar descripción"><br>
 </form>
 
-<!--hay que quitar los idiomas de ahi, estan en config.php-->
