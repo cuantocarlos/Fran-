@@ -17,7 +17,7 @@ $disponibilidades = [];
 if (!isset($_REQUEST["bAceptar"])) {
 
     //Sino se ha pulsado, incluyo el formulario
-    include "../templates/altaServicio.php";
+    include "../templates/formAltaServicio.php";
 
 } // Si se ha pulsado procesamos los datos recibidos
 else {
@@ -74,7 +74,7 @@ else {
         header("location:../templates/validAltaServicio.php?servicio=$servicio&categoria=$categoria&descripcion=$descripcion&tipoPago=$tipoPago&ubicacion=$ubicacion&disponibilidad=$disponibilidades&img=$img");
     } else {
         //Volvemos a mostrar el formulario con errores
-        include "../templates/altaServicio.php";
+        include "../templates/formAltaServicio.php";
     }
 }
 ?>

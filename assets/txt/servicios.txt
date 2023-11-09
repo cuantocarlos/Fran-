@@ -1,0 +1,8 @@
+Servicio:qwer
+Categoria:Electricidad
+Descripcion:qwerqwerwqe
+Tipo de pago:Intercambio
+Ubicacion:qreqwer
+Disponibilidades: Mañanas  Tardes 
+Img:1
+------
