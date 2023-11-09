@@ -43,7 +43,7 @@ include "libs/config.php";
     <label for="disponibilidad">Marca una o varias casillas con tu disponibilidad</label>
     <?php
         $disponibilidadesValidas = ["Mañanas","Tardes","Noches","Completa","Fines de semana"];
-        pintaCheckbox($disponibilidadesValidas,"disponibilidad");
+        pintaCheck($disponibilidadesValidas,"disponibilidad");
     ?>
 
     <label for="fotoServicio">¿Deseas subir alguna foto de tus servicios?</label>
