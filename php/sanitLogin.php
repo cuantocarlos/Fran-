@@ -20,6 +20,7 @@ if (!isset($_REQUEST['bAceptar'])) {
     cEmail($correo, "correo", $errores);
     cPass($contrasenya, "contraseña", $errores);
     if (empty($errores)) {
+        
     }
     
 }
