@@ -18,15 +18,15 @@ if (!isset($_REQUEST['bAceptar'])) {
 } else { //Si el formulario si ha aparecido
     //sanitizamos
     $new_pass = recoge("new_pass");
-  
+
     $idioma = recoge("idioma");
     $desc_personal = recoge("desc_personal");
     // procesamos validando los datos
     cPass($new_pass, "nueva contraseña", $errores);
     cSelect($idioma, "idioma", $errores, $idiomasValidos);
-    cTexto($desc_personal,"descripcion personal", $errores);
+    cTexto($desc_personal, "descripcion personal", $errores);
     if (empty($errores)) {
-        $imagenResultado=cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes);
+        $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes);
     }
     if (empty($errores)) {
         header("location:../templates/validPerfilUsuario.php?new_pass=$new_pass&img_perfil=$imagenResultado&idioma=$idioma&desc_personal=$desc_personal");
@@ -37,6 +37,3 @@ if (!isset($_REQUEST['bAceptar'])) {
 
 }
 pie();
-?>
-
-
