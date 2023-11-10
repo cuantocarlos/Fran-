@@ -1,6 +1,5 @@
 <?php
-require "../libs/config.php";
-$errores = false;
+include "../libs/config.php";
 
 cabecera("Perfil de usuario");
 //array donde almacenaremos el texto de los errores encontrados
@@ -13,7 +12,8 @@ $desc_personal = "";
 //Compruebo si se ha pulsado el botón del formulario
 if (!isset($_REQUEST['bAceptar'])) {
     //Si no se ha pulsado, incluyo el formulario
-    include 'formPerfilUsuario.php';
+    include "../templates/formPerfilUsuario.php";
+
 
 } else { //Si el formulario si ha aparecido
     //sanitizamos

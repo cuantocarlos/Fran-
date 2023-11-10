@@ -1,7 +1,7 @@
 <?php
 require "../libs/config.php";
-sesssion_start();
 
+cabecera("Registro");
 // array donde almacenaremos el texto de los errores encontrados
 $errores = [];
 $nombre = "";
@@ -60,5 +60,5 @@ else {
 
 <?php
 
-include "../templates/pie.php";
+pie();
 ?>
