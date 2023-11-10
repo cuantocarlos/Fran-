@@ -49,10 +49,14 @@ de manera voluntaria mínimo y máximo de caracteres (si = sería campo no reque
 si permitimos o no espacios en nuestra cadena y si la cadena es o no sensible a mayúsculas
  */
 
-function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = true, bool $case = true)
+function cTexto(string $text, string $campo, array &$errores, bool $requerido = true,int $max = 30, int $min = 1, bool $espacios = true, bool $case = true)
 {
+    
     $case = ($case === true) ? "i" : "";
     $espacios = ($espacios === true) ? " " : "";
+    if(!$requerido && $text=""){
+        return true;
+    }
     if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
         return true;
     }
@@ -215,8 +219,11 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
 }
 
 
-function cEmail(string $email, string $campo, array &$errores)
+function cEmail(string $email, string $campo, array &$errores, bool $requerido = true)
 {
+    if(!$requerido && $email == ""){
+        return true;
+    }
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return true;
     }
@@ -224,8 +231,11 @@ function cEmail(string $email, string $campo, array &$errores)
     return false;
 }
 
-function cPass(string $contrasenya, string $campo, array &$errores, int $min = 10, int $max = 150)
+function cPass(string $contrasenya, string $campo, array &$errores, bool $requerido = true, int $min = 10, int $max = 150)
 {
+    if(!$requerido && $contrasenya == ""){
+        return true;
+    }
     if (strlen($contrasenya) < $min || strlen($contrasenya) > $max) {
         $errores[$campo] = "Error en el campo $campo: la contraseña debe tener entre $min y $max caracteres.";
         return false;
@@ -249,8 +259,11 @@ function cPass(string $contrasenya, string $campo, array &$errores, int $min = 1
     return true;
 }
 
-function ValidaFechaamd($fecha, &$errores)
+function ValidaFechaamd($fecha, array &$errores, bool $requerido = true)
 {
+    if(!$requerido && $fecha == ""){
+        return true;
+    }
     $fechaArray = explode("-", $fecha);
     if ((count($fechaArray) == 3) && (checkdate($fechaArray[1], $fechaArray[2], $fechaArray[0]))) {
 

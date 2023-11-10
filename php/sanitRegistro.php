@@ -30,19 +30,19 @@ else {
     $idiomas = recoge("idiomas");
     $desc_personal = recoge("desc_personal");
 
-    //Validamos
+    //Validamos (por defecto, todos los campos son requeridos, si no, se envia false en el parámetro)
     cTexto($nombre, "nombre", $errores);
     cEmail($correo, "correo", $errores);
     cPass($passw, "contraseña", $errores);
     ValidaFechaamd($fecha_de_nacimiento, $errores);
-    cSelect($idiomas, "idioma", $errores, $idiomasValidas);
-    cTexto($desc_personal, "descripción personal", $errores, 140);
+    cSelect($idiomas, "idioma", $errores, $idiomasValidas,false);
+    cTexto($desc_personal, "descripción personal", $errores, false,140);
 
     if (empty($errores)) {
         /**
          * En este caso la subida del fichero es obligatoria
          **/
-        $img = cFile("img_perfil", $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
+        $img = cFile("img_perfil", $errores, $extensionesValidas, $rutaImagenes, $maxFichero, false);
 
         /**
          * Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos

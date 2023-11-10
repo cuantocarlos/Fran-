@@ -29,10 +29,10 @@ else {
     $ubicacion = recoge("ubicacion");
     $disponibilidades = recogeArray("disponibilidad");
     
-    //Validamos
+    //Validamos (por defecto, todos los campos son requeridos, si no, se envia false en el parámetro)
     cTexto($servicio, "servicio", $errores);
     cSelect($categoria,"categorias",$errores,$categoriasValidas);
-    cTexto($descripcion, "descripcion", $errores);
+    cTexto($descripcion, "descripcion", $errores,true, 140);
     cRadio($tipoPago,"tipo de pago",$errores,$tiposValidas);
     cTexto($ubicacion,"ubicacion",$errores);
     cCheck($disponibilidades,"disponibilidades",$errores,$disponibilidadesValidas);
@@ -41,7 +41,7 @@ else {
         /**
          * En este caso la subida del fichero es obligatoria
          **/
-        $img = cFile("img_servicio", $errores, $extensionesValidas, $rutaImagenes, $maxFichero, FALSE);
+        $img = cFile("img_servicio", $errores, $extensionesValidas, $rutaImagenes, $maxFichero, false);
 
         /**
          * Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
