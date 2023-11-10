@@ -1,7 +1,5 @@
 <?php
-include '../libs/bGeneral.php';
-include "../libs/config.php";
-include "../templates/cabecera.php";
+require "../libs/config.php";
 sesssion_start();
 
 // array donde almacenaremos el texto de los errores encontrados

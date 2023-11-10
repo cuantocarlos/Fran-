@@ -1,7 +1,3 @@
-<?php include("../libs/bComponentes.php");
-include('../libs/config.php');
-?>
-
 <p>
 	<?php
 		foreach ($errores as $error) {

@@ -1,5 +1,5 @@
 <?php
-include("../libs/bGeneral.php")
+require "../libs/config.php";
 ?>
 <h3>Genial!</h3>
 <h5>tu perfil de usuario ha sido modificado correctamente!</h5>

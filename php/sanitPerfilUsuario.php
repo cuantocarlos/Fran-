@@ -1,9 +1,5 @@
 <?php
-include "libs/bGeneral.php";
-include "libs/config.php";
-include "libs/bComponentes.php";
-include "templates/cabecera.php";
-include "templates/pie.php";
+require "../libs/config.php";
 $errores = false;
 
 cabecera("Perfil de usuario");

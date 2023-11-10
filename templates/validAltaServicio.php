@@ -1,5 +1,4 @@
 <?php
-require "../libs/bGeneral.php";
 require "../libs/config.php";
 
 ?>

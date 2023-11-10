@@ -1,6 +1,5 @@
 <?php
-include("../libs/bGeneral.php");
-include("../templates/cabecera.php");
+require "../libs/config.php";
 
 ?>
 

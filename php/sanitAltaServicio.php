@@ -1,6 +1,5 @@
 <?php
-include("../libs/bGeneral.php");
-include("../libs/config.php");
+require "../libs/config.php";
 
 // Array de errores a presentar
 $errores = [];
