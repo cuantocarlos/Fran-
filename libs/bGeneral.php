@@ -54,7 +54,7 @@ function cTexto(string $text, string $campo, array &$errores, bool $requerido = 
     
     $case = ($case === true) ? "i" : "";
     $espacios = ($espacios === true) ? " " : "";
-    if(!$requerido && $text=""){
+    if(!$requerido && $text==""){
         return true;
     }
     if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {

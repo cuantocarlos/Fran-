@@ -15,22 +15,7 @@ if (!isset($_REQUEST['bAceptar'])) {
     cPass($contrasenya, "contrasenya", $errores);
     if (empty($errores)) {
 
-        if($file=fopen("../assets/logLogin.txt","a+")){
-
-            fwrite($file,">>>>>>>>>>>>".PHP_EOL);
-            fwrite($file,"Correo: $correo".PHP_EOL);
-            fwrite($file,"Contrase&nacute;a: $contrasenya".PHP_EOL);
-
-            if($contrasenya!=recoge("contrasenya")){
-                
-                fwrite($file,"ERROR de autenticación".PHP_EOL);
-                fwrite($file,"Fecha: ".time().PHP_EOL);
-                fwrite($file,"<<<<<<<<<<<<<<<<<<<<".PHP_EOL);
-
-            }  
-            header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");  
-        }
-        
+        header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");  
     }
     
 }

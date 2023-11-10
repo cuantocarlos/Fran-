@@ -33,8 +33,9 @@ else {
     cEmail($correo, "correo", $errores);
     cPass($passw, "contraseña", $errores);
     ValidaFechaamd($fecha_de_nacimiento, $errores);
-    cSelect($idiomas, "idioma", $errores, $idiomasValidas,false);
-    cTexto($desc_personal, "descripción personal", $errores, false,140);
+    cSelect($idiomas, "idioma", $errores, $idiomasValidas, false);
+    echo "$desc_personal";
+    cTexto($desc_personal, "descripción personal", $errores, false, 140);
 
     if (empty($errores)) {
         /**
@@ -49,6 +50,16 @@ else {
     }
     //Sino se han encontrado errores pasamos a otra página
     if (empty($errores)) {
+
+        if ($file = fopen("../assets/txt/usuarios.txt", "a+")) {
+
+            fwrite($file, "Correo: $correo" . PHP_EOL);
+            fwrite($file, "Contraseña: $passw" . PHP_EOL);
+            fwrite($file, "Fecha: $fecha_de_nacimiento" . PHP_EOL);
+            fwrite($file, "-----" . PHP_EOL);
+
+        }
+
         header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
     } else {
         //Volvemos a mostrar el formulario con errores
