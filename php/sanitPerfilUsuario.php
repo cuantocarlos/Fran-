@@ -18,12 +18,13 @@ if (!isset($_REQUEST['bAceptar'])) {
 } else { //Si el formulario si ha aparecido
     //sanitizamos
     $new_pass = recoge("new_pass");
-
     $idioma = recoge("idioma");
     $desc_personal = recoge("desc_personal");
+    
     // procesamos validando los datos
     cPass($new_pass, "nueva contraseña", $errores);
     cSelect($idioma, "idioma", $errores, $idiomasValidos);
+    
     cTexto($desc_personal, "descripcion personal", $errores);
     if (empty($errores)) {
         $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes,$maxFichero);
