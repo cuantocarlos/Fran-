@@ -1,26 +1,25 @@
 <?php
-include "libs/bGeneral.php";
-include "libs/config.php";
-include "libs/bComponentes.php";
-include "templates/cabecera.php";
-include "templates/pie.php";
-$errores = false;
-session_start();
+include "../libs/bGeneral.php";
+include "../libs/config.php";
+include "../libs/bComponentes.php";
 
-cabecera("Iniciar sesión");
+$errores = false;
+
+//cabecera("Iniciar sesión");
 //array donde almacenaremos el texto de los errores encontrados
 $errores = [];
 $correo = "";
 $contrasenya = "";
 if (!isset($_REQUEST['bAceptar'])) {
-    include "templates/formLogin.php";
+    include "../templates/formLogin.php";
 } else {
     $correo = recoge("correo");
     $contrasenya = recoge("contrasenya");
     cEmail($correo, "correo", $errores);
-    cPass($contrasenya, "contraseña", $errores);
+    cPass($contrasenya, "contrasenya", $errores);
     if (empty($errores)) {
-        
+        header("location:../templates/validLogin.php?email=$correo&contrasenya=$contrasenya");
+
     }
     
 }

@@ -5,7 +5,7 @@ include "cabecera.php";
 foreach ($errores as $error) {
     echo $error . "<br>";
 }
-
+cabecera("Iniciar sesion");
 ?>
 <h2>Inicio de Sesión</h2>
 
