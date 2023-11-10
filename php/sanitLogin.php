@@ -1,11 +1,7 @@
 <?php
-include "../libs/bGeneral.php";
-include "../libs/config.php";
-include "../libs/bComponentes.php";
+require "../libs/config.php";
 
-$errores = false;
-
-//cabecera("Iniciar sesión");
+cabecera("Iniciar sesión");
 //array donde almacenaremos el texto de los errores encontrados
 $errores = [];
 $correo = "";

@@ -1,9 +1,7 @@
 <?php
-include '../libs/bGeneral.php';
-include "../libs/config.php";
-include "../templates/cabecera.php";
-sesssion_start();
+require "../libs/config.php";
 
+cabecera("Registro");
 // array donde almacenaremos el texto de los errores encontrados
 $errores = [];
 $nombre = "";
@@ -62,5 +60,5 @@ else {
 
 <?php
 
-include "../templates/pie.php";
+pie();
 ?>

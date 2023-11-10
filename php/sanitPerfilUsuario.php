@@ -1,10 +1,5 @@
 <?php
-include "libs/bGeneral.php";
-include "libs/config.php";
-include "libs/bComponentes.php";
-include "templates/cabecera.php";
-include "templates/pie.php";
-$errores = false;
+include "../libs/config.php";
 
 cabecera("Perfil de usuario");
 //array donde almacenaremos el texto de los errores encontrados
@@ -17,20 +12,21 @@ $desc_personal = "";
 //Compruebo si se ha pulsado el botón del formulario
 if (!isset($_REQUEST['bAceptar'])) {
     //Si no se ha pulsado, incluyo el formulario
-    include 'formPerfilUsuario.php';
+    include "../templates/formPerfilUsuario.php";
+
 
 } else { //Si el formulario si ha aparecido
     //sanitizamos
     $new_pass = recoge("new_pass");
-  
+
     $idioma = recoge("idioma");
     $desc_personal = recoge("desc_personal");
     // procesamos validando los datos
     cPass($new_pass, "nueva contraseña", $errores);
     cSelect($idioma, "idioma", $errores, $idiomasValidos);
-    cTexto($desc_personal,"descripcion personal", $errores);
+    cTexto($desc_personal, "descripcion personal", $errores);
     if (empty($errores)) {
-        $imagenResultado=cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes);
+        $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes);
     }
     if (empty($errores)) {
         header("location:../templates/validPerfilUsuario.php?new_pass=$new_pass&img_perfil=$imagenResultado&idioma=$idioma&desc_personal=$desc_personal");
@@ -41,6 +37,3 @@ if (!isset($_REQUEST['bAceptar'])) {
 
 }
 pie();
-?>
-
-

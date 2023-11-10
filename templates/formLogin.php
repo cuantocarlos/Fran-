@@ -1,11 +1,9 @@
 <?php
 
-include "cabecera.php";
 
 foreach ($errores as $error) {
     echo $error . "<br>";
 }
-cabecera("Iniciar sesion");
 ?>
 <h2>Inicio de Sesión</h2>
 
@@ -25,5 +23,5 @@ echo (isset($errores['correo'])) ? "$errores[correo] <br>" : "";
 </form>
 
 <?php
-include "pie.php";
+
 ?>

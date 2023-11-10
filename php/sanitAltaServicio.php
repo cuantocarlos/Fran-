@@ -1,7 +1,7 @@
 <?php
-include("../libs/bGeneral.php");
-include("../libs/config.php");
+require "../libs/config.php";
 
+cabecera("Alta servicio");
 // Array de errores a presentar
 $errores = [];
 $servicio ="";
@@ -77,6 +77,8 @@ else {
         include "../templates/formAltaServicio.php";
     }
 }
+
+pie();
 ?>
 
 

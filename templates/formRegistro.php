@@ -1,5 +1,3 @@
-<?php include("../libs/bComponentes.php");?>
-
 <p>
 	<?php
 	
