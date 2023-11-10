@@ -19,7 +19,7 @@
 
     <!-- Cammbiar foto de perfil-->
     <label for="new_foto">Nueva foto de perfil</label><br>
-    <input type="file" name="new_foto" id="new_foto" value="<?php echo $foto; ?>"><br>
+    <input type="file" name="new_foto" id="new_foto"><br>
     <input type="submit" name="cambiarFoto" value="Cambiar foto"><br>
 
     <!--Seleccion de idioma preferente-->
@@ -32,7 +32,7 @@
 
     <!--Descripcion personal-->
     <label for="descripcion">Descripcion personal:</label><br>
-    <textarea name="descripcion" id="descripcion" cols="30" rows="10"><?php echo $descripcion; ?></textarea><br>
+    <textarea name="descripcion" id="descripcion" cols="30" rows="10"><?php echo $desc_personal; ?></textarea><br>
     <input type="submit" name="bAceptar" value="Cambiar descripción"><br>
 </form>
 
