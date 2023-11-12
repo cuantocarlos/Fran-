@@ -27,7 +27,7 @@ if (!isset($_REQUEST['bAceptar'])) {
     
     cTexto($desc_personal, "descripcion personal", $errores);
     if (empty($errores)) {
-        $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes);
+        $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes,$maxFichero);
     }
     if (empty($errores)) {
         header("location:../templates/validPerfilUsuario.php?new_pass=$new_pass&img_perfil=$imagenResultado&idioma=$idioma&desc_personal=$desc_personal");

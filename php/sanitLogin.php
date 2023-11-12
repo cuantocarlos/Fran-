@@ -14,8 +14,8 @@ if (!isset($_REQUEST['bAceptar'])) {
     cEmail($correo, "correo", $errores);
     cPass($contrasenya, "contrasenya", $errores);
     if (empty($errores)) {
-        header("location:../templates/validLogin.php?email=$correo&contrasenya=$contrasenya");
 
+        header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");  
     }
     
 }
