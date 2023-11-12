@@ -15,6 +15,20 @@ if (!isset($_REQUEST['bAceptar'])) {
     cPass($contrasenya, "contrasenya", $errores);
     if (empty($errores)) {
 
+        if($file=fopen("../assets/txt/logLogin.txt","a+")){
+
+            $usr=fopen("../assets/txt/usuarios.txt","r");
+            
+            while(!feof($usr)){
+                $contenido=fgets($usr);
+            }
+            if($contenido==$contrasenya){
+                fwrite($file, "Usuario Logueado" . PHP_EOL);
+            }else{
+                fwrite($file, "ERROR DE AUTENTICACION" . PHP_EOL);
+            }
+            }
+
         header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");  
     }
     
