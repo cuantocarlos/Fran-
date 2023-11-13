@@ -49,12 +49,12 @@ de manera voluntaria mínimo y máximo de caracteres (si = sería campo no reque
 si permitimos o no espacios en nuestra cadena y si la cadena es o no sensible a mayúsculas
  */
 
-function cTexto(string $text, string $campo, array &$errores, bool $requerido = true,int $max = 30, int $min = 1, bool $espacios = true, bool $case = true)
+function cTexto(string $text, string $campo, array &$errores, bool $requerido = true, int $max = 30, int $min = 1, bool $espacios = true, bool $case = true)
 {
-    
+
     $case = ($case === true) ? "i" : "";
     $espacios = ($espacios === true) ? " " : "";
-    if(!$requerido && $text==""){
+    if (!$requerido && $text == "") {
         return true;
     }
     if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
@@ -218,10 +218,9 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
 
 }
 
-
 function cEmail(string $email, string $campo, array &$errores, bool $requerido = true)
 {
-    if(!$requerido && $email == ""){
+    if (!$requerido && $email == "") {
         return true;
     }
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -233,7 +232,7 @@ function cEmail(string $email, string $campo, array &$errores, bool $requerido =
 
 function cPass(string $contrasenya, string $campo, array &$errores, bool $requerido = true, int $min = 10, int $max = 150)
 {
-    if(!$requerido && $contrasenya == ""){
+    if (!$requerido && $contrasenya == "") {
         return true;
     }
     if (strlen($contrasenya) < $min || strlen($contrasenya) > $max) {
@@ -261,7 +260,7 @@ function cPass(string $contrasenya, string $campo, array &$errores, bool $requer
 
 function ValidaFechaamd($fecha, array &$errores, bool $requerido = true)
 {
-    if(!$requerido && $fecha == ""){
+    if (!$requerido && $fecha == "") {
         return true;
     }
     $fechaArray = explode("-", $fecha);
