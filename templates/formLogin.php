@@ -21,7 +21,6 @@ echo (isset($errores['correo'])) ? "$errores[correo] <br>" : "";
     <input type="submit" name="bAceptar" value="Entrar"/>
     <br>
 </form>
-
 <?php
 
 ?>

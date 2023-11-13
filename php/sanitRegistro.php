@@ -48,18 +48,28 @@ else {
          * Si ha habido error volveremos a mostrar el formulario
          **/
     }
-    //Sino se han encontrado errores pasamos a otra página
+    //Sino se han encontrado errores  guardamos el nuevo usuario y pasamos al documento con los datos validados
     if (empty($errores)) {
+        //genero un id para el usuario
+        $id = uniqid();
 
         if ($file = fopen("../assets/txt/usuarios.txt", "a+")) {
 
+            fwrite($file, "ID: $id" . PHP_EOL);
             fwrite($file, "Correo: $correo" . PHP_EOL);
             fwrite($file, "Contraseña: $passw" . PHP_EOL);
             fwrite($file, "Fecha: $fecha_de_nacimiento" . PHP_EOL);
             fwrite($file, "-----" . PHP_EOL);
+            fclose($file);
 
         }
+//inicio sesion
+        session_start();
+        $_SESSION['correo'] = $correo;
+        $_SESSION['contrasenya'] = $passw;
+        $_SESSION['id'] = $id;
 
+//redirecciono
         header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
     } else {
         //Volvemos a mostrar el formulario con errores
