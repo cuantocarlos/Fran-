@@ -17,8 +17,8 @@ if (!isset($_REQUEST['bAceptar'])) {
     if (empty($errores)) {
         if (usuarioExiste_v2($correo,$contrasenya,$errores)) {
                  //inicio sesion y redirecciono
-                 header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");
-     
+                 //header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");
+                header("location:../templates/paginaPrivada.php");
         } else {
             //$errores['usuario'] = "El usuario no existe";
             include("../templates/formLogin.php");
