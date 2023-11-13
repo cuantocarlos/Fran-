@@ -15,14 +15,13 @@ if (!isset($_REQUEST['bAceptar'])) {
     cEmail($correo, "correo", $errores);
     cPass($contrasenya, "contrasenya", $errores);
     if (empty($errores)) {
-        if (usuarioExiste()) {
+        if (usuarioExiste_v2($correo,$contrasenya,$errores)) {
                  //inicio sesion y redirecciono
-  
-                 header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");
-     
+                 //header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");
+                header("location:../templates/paginaPrivada.php");
         } else {
-            $errores['usuario'] = "El usuario no existe";
-
+            //$errores['usuario'] = "El usuario no existe";
+            include("../templates/formLogin.php");
         }
 
     }
@@ -30,10 +29,10 @@ if (!isset($_REQUEST['bAceptar'])) {
 }
 pie();
 //No se continuaría con la validación del login porque no se como va eso de la base de datos guardar la sesion, etc.
-function usuarioExiste()
+function usuarioExiste(string $correo, string $contrasenya)
 {
     //busco el usuario en el fichero
-    $file = fopen("../assets/txt/usuarios.txt");
+    $file = fopen("../assets/txt/usuarios.txt","r");
     while (!feof($file)) { //mientras no sea el final del archivo
         $linea = fgets($file);
         if (strstr($linea,"ID:")) { //si la linea contiene el ID
@@ -55,3 +54,34 @@ function usuarioExiste()
     }
     return false;
 }
+
+function usuarioExiste_v2(string $correo, string $contrasenya, array &$errores){
+    if($file = fopen("../assets/txt/usuarios.txt","r")){
+        fgets($file);
+        while(!feof($file)){
+            $linea = fgets($file);
+            $correoTemp = trim(explode(":", $linea)[1]);
+            if($correoTemp == $correo){
+                $linea = fgets($file);
+                $contrTemp = trim(explode(":",$linea)[1]);
+                if($contrTemp == $contrasenya){
+                    return true;
+            }else{
+                $errores["contrasenya"] = "Contrasenya incorrecta";
+                return false;
+            }
+        }else{
+            fgets($file);
+            fgets($file);
+            fgets($file);
+            fgets($file);
+        }
+
+    }
+    $errores["correo"] = "Correo incorrecto";
+    fclose($file);
+    return false;
+}
+}
+
+?>

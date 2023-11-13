@@ -1,6 +1,6 @@
 <?php
-sesssion_start();
-if (isset($_SESSION['correo'])) {
+
+//if (isset($_SESSION['correo'])) {
     require "../libs/config.php";
 
     cabecera("Alta servicio");
@@ -81,10 +81,12 @@ if (isset($_SESSION['correo'])) {
     }
     
     pie();
+    /*
 }else {
     header("location:../php/sanitLogin.php");
     exit();
 }
+*/
 
 ?>
 
