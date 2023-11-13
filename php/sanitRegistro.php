@@ -34,7 +34,6 @@ else {
     cPass($passw, "contraseña", $errores);
     ValidaFechaamd($fecha_de_nacimiento, $errores);
     cSelect($idiomas, "idioma", $errores, $idiomasValidas, false);
-    echo "$desc_personal";
     cTexto($desc_personal, "descripción personal", $errores, false, 140);
 
     if (empty($errores)) {
@@ -54,7 +53,7 @@ else {
         $id = uniqid();
 
         if ($file = fopen("../assets/txt/usuarios.txt", "a+")) {
-
+            echo $file;
             fwrite($file, "ID: $id" . PHP_EOL);
             fwrite($file, "Correo: $correo" . PHP_EOL);
             fwrite($file, "Contraseña: $passw" . PHP_EOL);
@@ -64,13 +63,16 @@ else {
 
         }
 //inicio sesion
+/*
         session_start();
         $_SESSION['correo'] = $correo;
         $_SESSION['contrasenya'] = $passw;
         $_SESSION['id'] = $id;
+        */
 
 //redirecciono
-        header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
+        //header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
+        header("location:sanitLogin.php");
     } else {
         //Volvemos a mostrar el formulario con errores
         include "../templates/formRegistro.php";
