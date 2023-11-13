@@ -48,11 +48,14 @@ else {
          * Si ha habido error volveremos a mostrar el formulario
          **/
     }
-    //Sino se han encontrado errores pasamos a otra página
+    //Sino se han encontrado errores  guardamos el nuevo usuario y pasamos al documento con los datos validados
     if (empty($errores)) {
+        //genero un id para el usuario
+        $id = uniqid();
 
         if ($file = fopen("../assets/txt/usuarios.txt", "a+")) {
 
+            fwrite($file, "ID: $id" . PHP_EOL);
             fwrite($file, "Correo: $correo" . PHP_EOL);
             fwrite($file, "Contraseña: $passw" . PHP_EOL);
             fwrite($file, "Fecha: $fecha_de_nacimiento" . PHP_EOL);
