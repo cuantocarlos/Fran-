@@ -46,6 +46,7 @@ function usuarioExiste()
                         $_SESSION['correo'] = $correo;
                         $_SESSION['contrasenya'] = $contrasenya;
                         $_SESSION['id'] = $id;
+                        fclose($file);
                         return true;
                 }
             }
