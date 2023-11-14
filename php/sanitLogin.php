@@ -19,14 +19,7 @@ if (!isset($_REQUEST['bAceptar'])) {
             header("location:../templates/paginaPrivada.php");
     } else {
         //$errores['usuario'] = "El usuario no existe";
-        if ($file2 = fopen("../assets/txt/logLogin.txt", "a")) {
-
-            fwrite($file2, "Correo: $correo" . PHP_EOL);
-            fwrite($file2, "Contraseña: $contrasenya" . PHP_EOL);
-            fwrite($file2, "Fecha: " . date('Y-m-d H.i.s') . PHP_EOL);
-            fwrite($file2, "-----" . PHP_EOL);
-        }
-        fclose($file2);
+        escribirLogLogin($correo, $contrasenya);
         include("../templates/formLogin.php");
     }
 }
@@ -58,34 +51,6 @@ function usuarioExiste(string $correo, string $contrasenya)
     return false;
 }
 
-function usuarioExiste_v2(string $correo, string $contrasenya, array &$errores)
-{
-    if ($file = fopen("../assets/txt/usuarios.txt", "r")) {
-        fgets($file);
-        while (!feof($file)) {
-            $linea = fgets($file);
-            $correoTemp = trim(explode(":", $linea)[1]);
-            if ($correoTemp == $correo) {
-                $linea = fgets($file);
-                $contrTemp = trim(explode(":", $linea)[1]);
-                if ($contrTemp == $contrasenya) {
-                    return true;
-                } else {
-                    $errores["contrasenya"] = "Contrasenya incorrecta";
-                    return false;
-                }
-            } else {
-                fgets($file);
-                fgets($file);
-                fgets($file);
-                fgets($file);
-            }
 
-        }
-        $errores["correo"] = "Correo incorrecto";
-        fclose($file);
-        return false;
-    }
-}
 
 ?>
