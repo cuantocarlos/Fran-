@@ -15,37 +15,13 @@ if (!isset($_REQUEST['bAceptar'])) {
     cEmail($correo, "correo", $errores);
     cPass($contrasenya, "contrasenya", $errores);
     if (empty($errores) && usuarioExiste_v2($correo,$contrasenya,$errores)) {
-            //inicio sesion y redirecciono
-            header("location:../templates/paginaPrivada.php");
-    } else {
-        //$errores['usuario'] = "El usuario no existe";
-        escribirLogLogin($correo, $contrasenya);
-        include("../templates/formLogin.php");
-    if (empty($errores)) {
-        if (usuarioExiste_v2($correo,$contrasenya,$errores)) {
-                 //inicio sesion y redirecciono
-                 //header("location:../templates/validLogin.php?correo=$correo&contrasenya=$contrasenya");
-                header("location:../templates/paginaPrivada.php");
-        } else {
-            //$errores['usuario'] = "El usuario no existe";
-            
-
-            if($file2=fopen("../assets/txt/logLogin.txt","w+")){
-                
-                echo "asdk";
-                fwrite($file2,"Correo: $correo".PHP_EOL);
-                fwrite($file2,"Contraseña: $contrasenya".PHP_EOL);
-                fwrite($file2,"Fecha: ". mktime("d,M,Y").PHP_EOL);
-                fwrite($file2,"-----".PHP_EOL);
-                }
-                fclose($file2);
-
-            
-
-            include("../templates/formLogin.php");
-        }
-
-    }
+        //inicio sesion y redirecciono
+        header("location:../templates/paginaPrivada.php");
+} else {
+    //$errores['usuario'] = "El usuario no existe";
+    escribirLogLogin($correo, $contrasenya);
+    include("../templates/formLogin.php");
+}
 }
 pie();
 //No se continuaría con la validación del login porque no se como va eso de la base de datos guardar la sesion, etc.
