@@ -28,7 +28,7 @@ if (!isset($_REQUEST['bAceptar'])) {
     if (empty($errores)) {
         $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
     }
-    if (empty($errores)) { //Si no hay errores redireccionamos al validPerfilUsuario.php pasando por GET los datos recogidos y guardo los nuevos datos en el fichero
+    if (empty($errores)) { //Si no hay errores guardo los nuevos datos en el fichero y redireccionamos al validPerfilUsuario.php pasando por GET los datos recogidos 
         $file = fopen("../assets/txt/usuarios.txt");
         //busco la linea del usuario
         while (!feof($file)) {
