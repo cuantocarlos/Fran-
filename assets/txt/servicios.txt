@@ -6,3 +6,11 @@ Ubicacion:qreqwer
 Disponibilidades: Mañanas  Tardes 
 Img:1
 ------
+Servicio:eutanasia
+Categoria:Electricidad
+Descripcion:te matan de free
+Tipo de pago:Intercambio
+Ubicacion:ewqfwe
+Disponibilidades: Mañanas  Tardes 
+Img:1
+------

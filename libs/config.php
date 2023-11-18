@@ -13,6 +13,7 @@ include "bComponentes.php";
 include "bGeneral.php";
 include "../templates/cabecera.php";
 include "../templates/pie.php";
+include "bFicheros.php";
 
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
@@ -34,3 +35,5 @@ $categoriasValidas = ["IT", "Fontaneria", "Electricidad", "Chofer", "Traductor"]
 $disponibilidadesValidas = ["Mañanas", "Tardes", "Noches", "Completa", "Fines de semana"];
 $idiomasValidas = ["es", "en", "it", "cat", "fr"];
 $tiposValidas = ["Intercambio", "Pago"];
+
+?>
