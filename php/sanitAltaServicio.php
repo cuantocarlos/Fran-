@@ -10,7 +10,7 @@ $servicio = "";
 $categoria = "";
 $descripcion = "";
 $tipoPago = "";
-//$precio_por_hora = "";
+$precio_por_hora = "";
 $ubicacion = "";
 $disponibilidades = [];
 
@@ -27,6 +27,7 @@ else {
     $categoria = recoge("categorias");
     $descripcion = recoge("desc_servicio");
     $tipoPago = recoge("tipos");
+    $precio_por_hora = recoge("precio_por_hora");
     $ubicacion = recoge("ubicacion");
     $disponibilidades = recogeArray("disponibilidad");
 
@@ -35,6 +36,7 @@ else {
     cSelect($categoria, "categorias", $errores, $categoriasValidas);
     cTexto($descripcion, "descripcion", $errores, true, 140);
     cRadio($tipoPago, "tipo de pago", $errores, $tiposValidas);
+    cNum($precio_por_hora,"precio por hora",$errores,false);
     cTexto($ubicacion, "ubicacion", $errores);
     cCheck($disponibilidades, "disponibilidades", $errores, $disponibilidadesValidas);
 
@@ -55,10 +57,10 @@ else {
         /**
          * Antes de pasar al documento con los datos validados, registramos el servicio en servicios.txt
          */
-        registrarAltaServicio($servicio, $categoria, $descripcion, $tipoPago, $ubicacion, $disponibilidades, $img);
+        registrarAltaServicio($servicio, $categoria, $descripcion, $tipoPago,$precio_por_hora, $ubicacion, $disponibilidades, $img);
 
         $disponibilidades = serialize($disponibilidades);
-        header("location:../templates/validAltaServicio.php?servicio=$servicio&categoria=$categoria&descripcion=$descripcion&tipoPago=$tipoPago&ubicacion=$ubicacion&disponibilidad=$disponibilidades&img=$img");
+        header("location:../templates/validAltaServicio.php?servicio=$servicio&categoria=$categoria&descripcion=$descripcion&tipoPago=$tipoPago&precio_por_hora=$precio_por_hora&ubicacion=$ubicacion&disponibilidad=$disponibilidades&img=$img");
     } else {
         //Volvemos a mostrar el formulario con errores
         include "../templates/formAltaServicio.php";
