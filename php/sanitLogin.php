@@ -14,13 +14,13 @@ if (!isset($_REQUEST['bAceptar'])) {
     $contrasenya = recoge("contrasenya");
     cEmail($correo, "correo", $errores);
     cPass($contrasenya, "contrasenya", $errores);
-    if (empty($errores) && usuarioExiste_v2($correo,$contrasenya,$errores)) {
-            //inicio sesion y redirecciono
-            header("location:../templates/paginaPrivada.php");
+    if (empty($errores) && usuarioExiste_v2($correo, $contrasenya, $errores)) {
+        //inicio sesion y redirecciono
+        header("location:../templates/paginaPrivada.php");
     } else {
         //$errores['usuario'] = "El usuario no existe";
         escribirLogLogin($correo, $contrasenya);
-        include("../templates/formLogin.php");
+        include "../templates/formLogin.php";
     }
 }
 pie();
@@ -50,7 +50,3 @@ function usuarioExiste(string $correo, string $contrasenya)
     }
     return false;
 }
-
-
-
-?>
