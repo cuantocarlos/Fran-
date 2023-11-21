@@ -53,6 +53,11 @@ else {
         
 //inicio sesion
 /*
+
+/**
+Todavía no me guardo datos en sesión hasta que se loguee
+
+**/
         session_start();
         $_SESSION['correo'] = $correo;
         $_SESSION['contrasenya'] = $passw;
@@ -61,6 +66,7 @@ else {
 
 //redirecciono
         //header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
+        registrarUsuario($correo,$passw,$fecha_de_nacimiento);
         header("location:sanitLogin.php");
     } else {
         //Volvemos a mostrar el formulario con errores

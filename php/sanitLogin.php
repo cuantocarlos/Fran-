@@ -14,17 +14,24 @@ if (!isset($_REQUEST['bAceptar'])) {
     $contrasenya = recoge("contrasenya");
     cEmail($correo, "correo", $errores);
     cPass($contrasenya, "contrasenya", $errores);
-    if (empty($errores) && usuarioExiste_v2($correo,$contrasenya,$errores)) {
-            //inicio sesion y redirecciono
-            header("location:../templates/paginaPrivada.php");
+    if (empty($errores) && usuarioExiste_v2($correo, $contrasenya, $errores)) {
+        //inicio sesion y redirecciono
+        header("location:../templates/paginaPrivada.php");
     } else {
         //$errores['usuario'] = "El usuario no existe";
         escribirLogLogin($correo, $contrasenya);
-        include("../templates/formLogin.php");
+        include "../templates/formLogin.php";
     }
 }
 pie();
 //No se continuaría con la validación del login porque no se como va eso de la base de datos guardar la sesion, etc.
+/****
+    Esta función la pasamos a la librería.
+    En caso de encontar el usuario y la contraseña tiene que devolver false
+    La escritura en las variables de sesión mejor no hacerlo dentro de esta función.
+    La contraseña no es necesario guardarla en sesiones
+*****/
+
 function usuarioExiste(string $correo, string $contrasenya)
 {
     //busco el usuario en el fichero
@@ -50,7 +57,3 @@ function usuarioExiste(string $correo, string $contrasenya)
     }
     return false;
 }
-
-
-
-?>

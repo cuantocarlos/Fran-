@@ -9,6 +9,7 @@ require "../libs/config.php";
     $categoria = recoge("categoria");
     $descripcion = recoge("descripcion");
     $tipoPago = recoge("tipoPago");
+    $precio_por_hora = recoge("precio_por_hora");
     $ubicacion = recoge("ubicacion");
     $disponibilidades = unserialize(recoge("disponibilidad"));
     $img = recoge("img");
@@ -17,6 +18,7 @@ echo "Tu servicio: $servicio<br>";
 echo "Tu categoria: $categoria <br>";
 echo "Tu descripcion: $descripcion<br>";
 echo "Tu tipo de pago: $tipoPago<br>";
+if($precio_por_hora != "") echo "Precio por hora: $precio_por_hora<br>"; 
 echo "Tu ubicacion: $ubicacion<br>";
 echo "Tu disponibilidad: ";
 foreach ($disponibilidades as $dispo) {
