@@ -53,6 +53,11 @@ else {
         
 //inicio sesion
 /*
+
+/**
+Todavía no me guardo datos en sesión hasta que se loguee
+
+**/
         session_start();
         $_SESSION['correo'] = $correo;
         $_SESSION['contrasenya'] = $passw;
