@@ -28,6 +28,9 @@ if (!isset($_REQUEST['bAceptar'])) {
     if (empty($errores)) {
         $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
     }
+        /****
+        Ya no pasamos nada por la URL
+    ****/
     if (empty($errores)) { 
        //cambiarPassw();
         header("location:../templates/validPerfilUsuario.php?new_pass=$new_pass&img_perfil=$imagenResultado&idioma=$idioma&desc_personal=$desc_personal");
