@@ -25,6 +25,13 @@ if (!isset($_REQUEST['bAceptar'])) {
 }
 pie();
 //No se continuaría con la validación del login porque no se como va eso de la base de datos guardar la sesion, etc.
+/****
+    Esta función la pasamos a la librería.
+    En caso de encontar el usuario y la contraseña tiene que devolver false
+    La escritura en las variables de sesión mejor no hacerlo dentro de esta función.
+    La contraseña no es necesario guardarla en sesiones
+*****/
+
 function usuarioExiste(string $correo, string $contrasenya)
 {
     //busco el usuario en el fichero
