@@ -1,4 +1,8 @@
-<?php
+ <?php
+/*
+Hay que bloquear para que solo puedan crear servicios los usuarios logueados, por
+ejemplo if (!isset($_SESSION['correo'])) hago un header location a login o al inicio
+*/
 
 //if (isset($_SESSION['correo'])) {
 require "../libs/config.php";
@@ -57,8 +61,15 @@ else {
         /**
          * Antes de pasar al documento con los datos validados, registramos el servicio en servicios.txt
          */
-        registrarAltaServicio($servicio, $categoria, $descripcion, $tipoPago,$precio_por_hora, $ubicacion, $disponibilidades, $img);
 
+        /*****
+        Compuerbo si la escritura en el fichero ha ido bien
+        *****/
+        registrarAltaServicio($servicio, $categoria, $descripcion, $tipoPago,$precio_por_hora, $ubicacion, $disponibilidades, $img);
+/************
+Ya no paso nada por la URL.
+Si necesito algo lo guardo en sesiones aunque en este caso no se si es necesario mostrar todos los datos del servicio creado
+*****/
         $disponibilidades = serialize($disponibilidades);
         header("location:../templates/validAltaServicio.php?servicio=$servicio&categoria=$categoria&descripcion=$descripcion&tipoPago=$tipoPago&precio_por_hora=$precio_por_hora&ubicacion=$ubicacion&disponibilidad=$disponibilidades&img=$img");
     } else {
