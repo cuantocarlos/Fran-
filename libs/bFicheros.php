@@ -1,4 +1,8 @@
 <?php
+/*
+Teneis que comprobar que las escrituras han ido bien.
+todas las funciones deben devolver algo en todas sus "salidas"
+*/
 
 function escribirLogLogin(string $correo, string $contrasenya){
     if ($file2 = fopen("../assets/txt/logLogin.txt", "a")) {
@@ -40,6 +44,9 @@ function usuarioExiste_v2(string $correo, string $contrasenya, array &$errores)
         return false;
     }
 }
+/*
+Mejor montarlo todo en un string y lanzar solo un fwrite. Aunque le incluyamos los saltos de línea al string
+*/
 
 function registrarAltaServicio(string $servicio, string $categoria, string $descripcion, string $tipoPago, string $precio_por_hora, string $ubicacion, array $disponibilidades, string $img){
     if($file = fopen("../assets/txt/servicios.txt","a+")){
