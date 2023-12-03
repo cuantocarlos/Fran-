@@ -2,6 +2,7 @@
 /*
 Teneis que comprobar que las escrituras han ido bien.
 todas las funciones deben devolver algo en todas sus "salidas"
+A estas funciones siempre le pasamos el fichero por parámetro, no lo dejamos fijo en el código
 */
 
 function escribirLogLogin(string $correo, string $contrasenya){
