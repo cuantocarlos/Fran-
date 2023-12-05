@@ -6,7 +6,12 @@
 
     ?>
 </p>
-
+<?php
+//Si no tiene acceso=1, se le lleva de vuelta a la página inicial.
+if($_SESSION["acceso"]!=1){
+    header("location:paginaInicial.php");
+}
+?>
 
 <form action="" method='post' enctype="multipart/form-data">
     Servicio: <input TYPE="text" NAME="servicio" VALUE="<?= isset($servicio) ? $servicio : ""; ?>" /><br>

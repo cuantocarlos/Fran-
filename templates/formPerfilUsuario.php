@@ -7,6 +7,14 @@
 
 	?>
 </p>
+
+<?php
+//Si no tiene acceso=1, se le lleva de vuelta a la página inicial.
+if($_SESSION["acceso"]!=1){
+    header("location:paginaInicial.php");
+}
+?>
+
 <form action="index.php" method="post" enctype="multipart/form-data">
     <!--Cambiar contraseña-->
     <label for="current_pass">Contraseña actual</label>
