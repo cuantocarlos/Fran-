@@ -18,7 +18,8 @@ if (!isset($_REQUEST['bAceptar'])) {
     cPass($contrasenya, "contrasenya", $errores);
     if (empty($errores) && usuarioExiste_v2($correo, $contrasenya, $errores)) {
         //inicio sesion y redirecciono
-        //$_SESSION["user"] -> Lo recogeremos cuando implantemos la BBDD
+        //$_SESSION["user"] -> Lo recogeremos cuando implantemos la BBDD.
+        //$_SESSION["img"] -> Lo recogeremos cuando implantemos la BBDD.
         $_SESSION["ip"] = $_SERVER["REMOTE_ADDR"]; // -> Control de IP
         $_SESSION["time"] = time();
         $_SESSION["acceso"] = 1;

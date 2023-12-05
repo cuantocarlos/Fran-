@@ -9,8 +9,11 @@ if($_SESSION["acceso"]!=1){
 
 cabecera("Pagina privada");
 echo "<h1>LISTA DE SERVICIOS</h1><br>";
+echo "<br><p>Bienvenido, ".$_SESSION["email"]." !<p><br>";
+//echo "<img src=\"../assets/imgUsuarios/".$_SESSION["img"]."\">";
 mostrarServicios();
-echo "<a href=\"../php/sanitAltaServicio.php\">Dar de alta un servicio nuevo</>";
+echo "<br><a href=\"../php/sanitAltaServicio.php\">Dar de alta un servicio nuevo</>";
+echo "<br><a href=\"../php/salir.php\">Salir del sistema</a>";
 pie();
 
 ?>
