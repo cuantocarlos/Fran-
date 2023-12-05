@@ -13,6 +13,16 @@
 if($_SESSION["acceso"]!=1){
     header("location:paginaInicial.php");
 }
+//Control de cierre por inactividad
+if(isset($_SESSION["time"])){
+    $vidaSesion = time() - $_SESSION["time"];
+
+    if($vidaSesion > 10){
+        header("location:../php/salir.php");
+    }else{
+        $_SESSION["time"] = time();
+    }
+}
 ?>
 
 <form action="index.php" method="post" enctype="multipart/form-data">
