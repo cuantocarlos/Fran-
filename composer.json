@@ -1,0 +1,6 @@
+{
+    "name": "pcs/eval",
+    "require": {
+        "phpmailer/phpmailer": "^6.8"
+    }
+}

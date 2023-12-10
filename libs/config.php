@@ -15,6 +15,7 @@ include "../templates/cabecera.php";
 include "../templates/pie.php";
 include "bFicheros.php";
 
+
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
  */

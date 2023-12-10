@@ -1,6 +1,6 @@
 <?php
 include "../libs/config.php";
-
+session_start();
 cabecera("Perfil de usuario");
 //array donde almacenaremos el texto de los errores encontrados
 $errores = [];
@@ -23,22 +23,16 @@ if (!isset($_REQUEST['bAceptar'])) {
     // procesamos validando los datos
     cPass($new_pass, "nueva contraseña", $errores);
     cSelect($idioma, "idioma", $errores, $idiomasValidos);
-
     cTexto($desc_personal, "descripcion personal", $errores);
+
     if (empty($errores)) {
         $imagenResultado = cFile("new_foto", $errores, $extensionesValidas, $rutaImagenes, $maxFichero);
     }
-    if (empty($errores)) { //Si no hay errores redireccionamos al validPerfilUsuario.php pasando por GET los datos recogidos y guardo los nuevos datos en el fichero
-        $file = fopen("../assets/txt/usuarios.txt");
-        //busco la linea del usuario
-        while (!feof($file)) {
-            $linea = fgets($file);
-            if (strstr($linea, $_SESSION['id'])) {
-                break;
-            }
-            //inacabado falta el ID
-        }
-
+        /****
+        Ya no pasamos nada por la URL
+    ****/
+    if (empty($errores)) { 
+       //cambiarPassw();
         header("location:../templates/validPerfilUsuario.php?new_pass=$new_pass&img_perfil=$imagenResultado&idioma=$idioma&desc_personal=$desc_personal");
     } else {
         //Volvemos a mostrar el formulario con errores
@@ -47,3 +41,4 @@ if (!isset($_REQUEST['bAceptar'])) {
 
 }
 pie();
+//descripcion, idioma y foto de perfil aun no esta implementado a la espera de que continue la actividad y se implemente la base de datos
