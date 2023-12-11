@@ -18,9 +18,9 @@ if(isset($_SESSION["time"])){
 }
 
 cabecera("Pagina privada");
-echo "<h1>LISTA DE SERVICIOS</h1><br>";
 echo "<br><p>Bienvenido, ".$_SESSION["email"]." !<p><br>";
 //echo "<img src=\"../assets/imgUsuarios/".$_SESSION["img"]."\">";
+echo "<h1>Servicios que puedes contratar </h1><br>";
 mostrarServicios();
 echo "<br><a href=\"../php/sanitAltaServicio.php\">Dar de alta un servicio nuevo</>";
 echo "<br><a href=\"../php/salir.php\">Salir del sistema</a>";
