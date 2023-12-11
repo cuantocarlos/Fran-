@@ -272,3 +272,45 @@ function ValidaFechaamd($fecha, array &$errores, bool $requerido = true)
         return false;
     }
 }
+
+function cookiesObligatorios()
+{
+    if (!isset($_COOKIE["politicaCookies"]) || $_COOKIE["politicaCookies"] !== "aceptada") {
+        echo "<div id='avisoCookies' style='display:none; position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: #fff; text-align: center; padding: 10px;'>
+                <p>Esta página web utiliza cookies para su funcionamiento. <br> Al continuar navegando, acepta su uso.
+                <a href='#' id='aceptarCookies'>Aceptar</a></p>
+              </div>";
+
+        echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var avisoCookies = document.getElementById('avisoCookies');
+                    var aceptarCookies = document.getElementById('aceptarCookies');
+
+                    // Muestra el aviso si la cookie no ha sido aceptada
+                    if(avisoCookies && aceptarCookies) {
+                        avisoCookies.style.display = 'block';
+
+                        // Agrega un evento al enlace de aceptar cookies
+                        aceptarCookies.addEventListener('click', function() {
+                            // Hace una petición al mismo script con el parámetro aceptarCookies=true
+                            window.location.href = '?aceptarCookies=true';
+                        });
+                    }
+                });
+              </script>";
+    }
+}
+
+function cookiesAceptadas()
+{
+    setcookie("politicaCookies", "aceptada", time() + 365 * 24 * 60 * 60, "/"); // Caduca en un año
+
+    // Después de establecer la cookie, recarga la página.
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// Verifica si se ha hecho clic en el enlace de aceptar cookies.
+if (isset($_GET['aceptarCookies']) && $_GET['aceptarCookies'] === 'true') {
+    cookiesAceptadas();
+}

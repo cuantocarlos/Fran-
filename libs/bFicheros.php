@@ -156,6 +156,3 @@ function cambiarPasw(string $new_pass){ //Supongo que le faltarán parámetros x
             }
     
 }
-
-
-?>
