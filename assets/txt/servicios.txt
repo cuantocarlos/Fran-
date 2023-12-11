@@ -1,17 +1,17 @@
-Servicio:ewqrfeqwr
+Servicio:Masajes descontracturantes
 Categoria:IT
-Descripcion:fqwef
+Descripcion:Masajes para eliminar contracturas
 Tipo de pago:Pago
-Precio por hora:213
-Ubicacion:ffq
+Precio por hora:12
+Ubicacion:Segovia
 Disponibilidades: Mañanas  Tardes 
 Img:1
 ------
-Servicio:ewqrfeqwr
+Servicio:Clases de informatica
 Categoria:IT
-Descripcion:fqwef
+Descripcion:Clases de informatica para todos los niveles
 Tipo de pago:Intercambio
-Ubicacion:ffq
+Ubicacion:Valencia 
 Disponibilidades: Mañanas  Tardes 
-Img:1
+Img:2
 ------

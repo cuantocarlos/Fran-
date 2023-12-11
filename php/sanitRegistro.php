@@ -74,10 +74,6 @@ Todavía no me guardo datos en sesión hasta que se loguee
         include "../templates/formRegistro.php";
     }
 }
-?>
-
-
-<?php
 
 pie();
 ?>
