@@ -275,10 +275,19 @@ function ValidaFechaamd($fecha, array &$errores, bool $requerido = true)
 
 function cookiesObligatorios()
 {
+    // si se ha aceptado previamente la politica de cookies
+    if (isset($_GET['aceptarCookies']) && $_GET['aceptarCookies'] === 'true') {
+        setcookie("politicaCookies", "aceptada", time() + 365 * 24 * 60 * 60, "/"); // Caduca en un año
+
+        // Después de establecer la cookie, recarga la página.
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
+    // si NO se ha aceptado previamente la politica de cookies
     if (!isset($_COOKIE["politicaCookies"]) || $_COOKIE["politicaCookies"] !== "aceptada") {
         echo "<div id='avisoCookies' style='display:none; position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: #fff; text-align: center; padding: 10px;'>
                 <p>Esta página web utiliza cookies para su funcionamiento. <br> Al continuar navegando, acepta su uso.
-                <a href='#' id='aceptarCookies'>Aceptar</a></p>
+                <a href='?aceptarCookies=true' id='aceptarCookies'>Aceptar</a></p>
               </div>";
 
         echo "<script>
@@ -299,20 +308,6 @@ function cookiesObligatorios()
                 });
               </script>";
     }
-}
-
-function cookiesAceptadas()
-{
-    setcookie("politicaCookies", "aceptada", time() + 365 * 24 * 60 * 60, "/"); // Caduca en un año
-
-    // Después de establecer la cookie, recarga la página.
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
-
-// Verifica si se ha hecho clic en el enlace de aceptar cookies.
-if (isset($_GET['aceptarCookies']) && $_GET['aceptarCookies'] === 'true') {
-    cookiesAceptadas();
 }
 
 //opcion seleccion color de fondo
@@ -346,7 +341,6 @@ function colorFondo()
             } else {
                 $colorPoner = " #b2babb ";
             }
-            
             echo "<style>body{background-color:" . $colorPoner . ";}</style>";
         }
     }
