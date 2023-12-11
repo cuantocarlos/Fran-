@@ -314,3 +314,40 @@ function cookiesAceptadas()
 if (isset($_GET['aceptarCookies']) && $_GET['aceptarCookies'] === 'true') {
     cookiesAceptadas();
 }
+
+//opcion seleccion color de fondo
+function colorFondo()
+{
+    // Verifica si la sesión está iniciada y el nivel de acceso es mayor que 0
+    if (isset($_SESSION["acceso"]) && $_SESSION["acceso"] > 0) {
+        // Verifica si se ha enviado el formulario
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Verifica si se ha seleccionado un color
+            if (isset($_POST["colorFondo"])) {
+                $colorSeleccionado = $_POST["colorFondo"];
+
+                // Establece la cookie con el color seleccionado durante un año
+                setcookie("colorFondo", $colorSeleccionado, time() + 365 * 24 * 60 * 60, "/");
+            }
+        }
+
+        echo "<form method='post'>";
+        // Imprime el select con las opciones y el nombre "colorFondo"
+        pintaSelect(["claro", "oscuro"], "colorFondo");
+
+        // Botón para enviar el formulario
+        echo "<input type='submit' value='Guardar'>";
+        echo "</form>";
+
+        // Verifica si la cookie "colorFondo" está establecida y aplica el estilo
+        if (isset($_COOKIE["colorFondo"])) {
+            if ($_COOKIE["colorFondo"] == "claro") {
+                $colorPoner = "white";
+            } else {
+                $colorPoner = " #b2babb ";
+            }
+            
+            echo "<style>body{background-color:" . $colorPoner . ";}</style>";
+        }
+    }
+}
