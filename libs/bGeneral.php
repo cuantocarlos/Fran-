@@ -275,10 +275,19 @@ function ValidaFechaamd($fecha, array &$errores, bool $requerido = true)
 
 function cookiesObligatorios()
 {
+    // si se ha aceptado previamente la politica de cookies
+    if (isset($_GET['aceptarCookies']) && $_GET['aceptarCookies'] === 'true') {
+        setcookie("politicaCookies", "aceptada", time() + 365 * 24 * 60 * 60, "/"); // Caduca en un año
+
+        // Después de establecer la cookie, recarga la página.
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
+    // si NO se ha aceptado previamente la politica de cookies
     if (!isset($_COOKIE["politicaCookies"]) || $_COOKIE["politicaCookies"] !== "aceptada") {
         echo "<div id='avisoCookies' style='display:none; position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: #fff; text-align: center; padding: 10px;'>
                 <p>Esta página web utiliza cookies para su funcionamiento. <br> Al continuar navegando, acepta su uso.
-                <a href='#' id='aceptarCookies'>Aceptar</a></p>
+                <a href='?aceptarCookies=true' id='aceptarCookies'>Aceptar</a></p>
               </div>";
 
         echo "<script>
@@ -301,16 +310,38 @@ function cookiesObligatorios()
     }
 }
 
-function cookiesAceptadas()
+//opcion seleccion color de fondo
+function colorFondo()
 {
-    setcookie("politicaCookies", "aceptada", time() + 365 * 24 * 60 * 60, "/"); // Caduca en un año
+    // Verifica si la sesión está iniciada y el nivel de acceso es mayor que 0
+    if (isset($_SESSION["acceso"]) && $_SESSION["acceso"] > 0) {
+        // Verifica si se ha enviado el formulario
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Verifica si se ha seleccionado un color
+            if (isset($_POST["colorFondo"])) {
+                $colorSeleccionado = $_POST["colorFondo"];
 
-    // Después de establecer la cookie, recarga la página.
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
+                // Establece la cookie con el color seleccionado durante un año
+                setcookie("colorFondo", $colorSeleccionado, time() + 365 * 24 * 60 * 60, "/");
+            }
+        }
 
-// Verifica si se ha hecho clic en el enlace de aceptar cookies.
-if (isset($_GET['aceptarCookies']) && $_GET['aceptarCookies'] === 'true') {
-    cookiesAceptadas();
+        echo "<form method='post'>";
+        // Imprime el select con las opciones y el nombre "colorFondo"
+        pintaSelect(["claro", "oscuro"], "colorFondo");
+
+        // Botón para enviar el formulario
+        echo "<input type='submit' value='Guardar'>";
+        echo "</form>";
+
+        // Verifica si la cookie "colorFondo" está establecida y aplica el estilo
+        if (isset($_COOKIE["colorFondo"])) {
+            if ($_COOKIE["colorFondo"] == "claro") {
+                $colorPoner = "white";
+            } else {
+                $colorPoner = " #b2babb ";
+            }
+            echo "<style>body{background-color:" . $colorPoner . ";}</style>";
+        }
+    }
 }
