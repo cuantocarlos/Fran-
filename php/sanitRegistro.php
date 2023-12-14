@@ -67,7 +67,7 @@ Todavía no me guardo datos en sesión hasta que se loguee
 
 //redirecciono
         //header("location:../templates/validRegistro.php?nombre=$nombre&correo=$correo&passwº=$passw&fecha_de_nacimiento=$fecha_de_nacimiento&idioma=$idiomas&desc_personal=$desc_personal&img_perfil=$img");
-        registrarUsuario($correo,$passw,$fecha_de_nacimiento);
+        registrarUsuario($nombre, $correo, $passw, $fecha_de_nacimiento, $img, $desc_personal, 1, 0);
         header("location:sanitLogin.php");
     } else {
         //Volvemos a mostrar el formulario con errores

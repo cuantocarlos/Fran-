@@ -1,7 +1,7 @@
 <?php
 //Aquí iran las funciones relacionadas con la BBDD
 
-function insertarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $descripcion, $nivel, $activo){
+function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $descripcion, $nivel, $activo){
 
     try{
         include("conexion.php");
@@ -18,6 +18,7 @@ function insertarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $d
         
         if($stmt -> execute()){
             echo "";//Llevar a algun sitio
+        //    header("location:/");
         }else{
             echo "";//Llevar a otro sitio
         }
