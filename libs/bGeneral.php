@@ -288,7 +288,7 @@ function cookiesObligatorios()
         echo "<div id='avisoCookies' style='display:none; position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: #fff; text-align: center; padding: 10px;'>
                 <p>Esta página web utiliza cookies para su funcionamiento. <br> Al continuar navegando, acepta su uso.
                 <a href='?aceptarCookies=true' id='aceptarCookies'>Aceptar</a></p>
-              </div>";
+            </div>";
 
         echo "<script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -306,7 +306,7 @@ function cookiesObligatorios()
                         });
                     }
                 });
-              </script>";
+            </script>";
     }
 }
 
@@ -344,5 +344,29 @@ function colorFondo()
             echo "<style>body{background-color:" . $colorPoner . ";}</style>";
         }
     }
+}
+function otorgarAcceso(int $tiempo, int $nivel =0 ){
+    //si no se le pasa tiempo que ponga 10 minutos por defecto
+    if ($tiempo=null) {
+        $tiempo =time() + 60 * 10;
+    }
+    $_SESSION['nivel']=$nivel;
+    $_SESSION['time']=$tiempo;
+}
+function controlAcceso()
+{ //verifica que el que navega por la pagina contenga tiempo y renueva el tiempo, controla que se acceda con el nivel correcto
+    //Sino existe $_SESSION['acceso'] lo ponemos a 0. Será un usuario invitado
+    if (!isset($_SESSION['nivel'])) {
+        $_SESSION['nivel'] = 0;
+    }
+
+    //si no cumples con los requisitos de seguridad, te echa
+    if ($_SESSION['nivel'] > 0 && $_SESSION['time'] > time()) {
+        //si cumple los requisitos se renueva el tiempo
+        $_SESSION['time'] = time() + 60 * 10;
+    } else {
+        header("location: ../php/salir.php");
+    }
+
 }
 

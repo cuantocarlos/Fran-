@@ -6,7 +6,7 @@ cabecera("Iniciar sesión");
 $errores = [];
 $correo = "";
 $contrasenya = "";
-if(!isset($_SESSION["acceso"])){
+if(!isset($_SESSION["acceso"])){//cambiar a controlAcceso()
     $_SESSION["acceso"] = 0;
 }
 if (!isset($_REQUEST['bAceptar'])) {
@@ -21,8 +21,9 @@ if (!isset($_REQUEST['bAceptar'])) {
         //$_SESSION["user"] -> Lo recogeremos cuando implantemos la BBDD.
         //$_SESSION["img"] -> Lo recogeremos cuando implantemos la BBDD.
         $_SESSION["ip"] = $_SERVER["REMOTE_ADDR"]; // -> Control de IP
-        $_SESSION["time"] = time();
-        $_SESSION["acceso"] = 1;
+        $tiempo=10*60;
+        $nivel=1;
+        otorgarAcceso($tiempo,$nivel);
         $_SESSION["email"] = $correo;
         header("location:../templates/paginaPrivada.php");
     } else {
