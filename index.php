@@ -1,12 +1,13 @@
+<?php
+session_start();
+$_SESSION["nivel"] = 0;
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Intercambio de Servicios</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
-
-   
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">   
 </head>
 <body>
     <header>
@@ -31,7 +32,7 @@
     Las páginas tienen que ser dinámicas. Los servicios que aquí mostramos tienen que ser los que leemos del ficher y más
     adelante de la base de datos
     ***/
-    
+
     <section id="servicios-destacados">
         <h2>Servicios Destacados</h2>
         <div class="servicio">
