@@ -8,7 +8,9 @@
 </p>
 <?php
 session_start();
-//Control acceso por nivel y tiempo
+
+//Control de acceso por inactividad y nivel
+
 controlAcceso();
 
 ?>
