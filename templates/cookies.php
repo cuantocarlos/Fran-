@@ -8,15 +8,7 @@
     
 </head>
 <body>
-    <div id='avisoCookies' style="display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px;">
+    <div id='avisoCookies'>
                 <p>Esta página web utiliza cookies para su funcionamiento. <br> Al continuar navegando, acepta su uso.
                 <a href='?aceptarCookies=true' id='aceptarCookies'>Aceptar</a></p>
               </div>
