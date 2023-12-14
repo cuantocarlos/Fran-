@@ -73,21 +73,22 @@ function registrarAltaServicio(string $servicio, string $categoria, string $desc
     }
 }
 
-function registrarUsuario(string $correo, string $passw, string $fecha_de_nacimiento)
-{
-    $id = uniqid();
+// function registrarUsuario(string $correo, string $passw, string $fecha_de_nacimiento)
+// {
+//     $id = uniqid();
 
-    if ($file = fopen("../assets/txt/usuarios.txt", "a+")) {
-        echo $file;
-        fwrite($file, "ID: $id" . PHP_EOL);
-        fwrite($file, "Correo: $correo" . PHP_EOL);
-        fwrite($file, "Contraseña: $passw" . PHP_EOL);
-        fwrite($file, "Fecha: $fecha_de_nacimiento" . PHP_EOL);
-        fwrite($file, "-----" . PHP_EOL);
-        fclose($file);
+//     if ($file = fopen("../assets/txt/usuarios.txt", "a+")) {
+//         echo $file;
+//         fwrite($file, "ID: $id" . PHP_EOL);
+//         fwrite($file, "Correo: $correo" . PHP_EOL);
+//         fwrite($file, "Contraseña: $passw" . PHP_EOL);
+//         fwrite($file, "Fecha: $fecha_de_nacimiento" . PHP_EOL);
+//         fwrite($file, "-----" . PHP_EOL);
+//         fclose($file);
+//     }
 
-    }
-}
+//     con BBDD, borrar
+// }
 
 function mostrarServicios()
 {

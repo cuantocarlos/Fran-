@@ -8,11 +8,7 @@
 </p>
 <?php
 session_start();
-//Si no tiene acceso=1, se le lleva de vuelta a la página inicial.
-if($_SESSION["acceso"]!=1){
-    header("location:paginaInicial.php");
-}
-//Control de cierre por inactividad
+//Control acceso por nivel y tiempo
 controlAcceso();
 
 ?>
