@@ -9,20 +9,9 @@
 </p>
 
 <?php
-//Si no tiene acceso=1, se le lleva de vuelta a la página inicial.
-if($_SESSION["acceso"]!=1){
-    header("location:paginaInicial.php");
-}
-//Control de cierre por inactividad
-if(isset($_SESSION["time"])){
-    $vidaSesion = time() - $_SESSION["time"];
+//Control de cierre por inactividad y nivel
+controlAcceso();
 
-    if($vidaSesion > 10){
-        header("location:../php/salir.php");
-    }else{
-        $_SESSION["time"] = time();
-    }
-}
 ?>
 
 <form action="index.php" method="post" enctype="multipart/form-data">
@@ -43,7 +32,6 @@ if(isset($_SESSION["time"])){
     <!--Seleccion de idioma preferente-->
     <label for="idioma" >Idioma preferente</label>
     <?php
-      
         pintaSelect($idiomasValidas, "idioma");
     ?>
     <br>

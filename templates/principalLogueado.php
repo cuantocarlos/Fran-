@@ -4,6 +4,7 @@
 session_start();
 if (isset($_SESSION['correo'])) {
     include("../libs/config.php");
+    controlAcceso();
     cabecera("Ya puedes intercambiar tus servicios!");
     pie();
 }else {
