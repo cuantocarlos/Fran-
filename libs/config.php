@@ -37,4 +37,14 @@ $disponibilidadesValidas = ["Mañanas", "Tardes", "Noches", "Completa", "Fines d
 $idiomasValidas = ["es", "en", "it", "cat", "fr"];
 $tiposValidas = ["Intercambio", "Pago"];
 
+
+/*
+* Valores de acceso para la BBDD
+*/
+
+$db_hostname = "localhost";
+$db_nombre = "evaluable_7W";
+$db_usuario = "root";
+$db_clave = "";
+
 ?>
