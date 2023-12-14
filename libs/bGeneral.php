@@ -327,13 +327,6 @@ function colorFondo()
         }
     }
 }
-function otorgarAcceso(int $tiempo, int $nivel =0, &$errores){
-    //si no se le pasa tiempo que ponga 10 minutos por defecto
-    if ($tiempo==null) {
-        $tiempo =time() + 60 * 10;
-    }
-    
-}
 function controlAcceso()
 { //verifica que el que navega por la pagina contenga tiempo y renueva el tiempo, controla que se acceda con el nivel correcto
     //Sino existe $_SESSION['acceso'] lo ponemos a 0. Será un usuario invitado
@@ -349,4 +342,3 @@ function controlAcceso()
     }
 
 }
-
