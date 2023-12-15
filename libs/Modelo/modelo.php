@@ -18,12 +18,13 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
         
         if($stmt -> execute()){
             echo "";//Llevar a algun sitio
-        //    header("location:/");
+            header("location:../php/sanitLogin.php");
         }else{
             echo "";//Llevar a otro sitio
+            header("location:../php/sanitRegistro.php");
         }
 }catch(PDOException $e){
-    error_log($e->getMessage()."###Codigo: ".$e->getCode()." ".microtime(). PHP_EOL,3,"logBD.txt");
+    error_log($e->getMessage()."###Codigo: ".$e->getCode()." ".microtime(). PHP_EOL,3,"../logBD.txt");
 }
 $pdo = NULL;
 }
