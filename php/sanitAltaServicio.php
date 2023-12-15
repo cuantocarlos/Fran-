@@ -11,12 +11,15 @@ cabecera("Alta servicio");
 // Array de errores a presentar
 $errores = [];
 $servicio = "";
+//$_SESSION["titulo"]=$servicio;
+//$_SESSION ["id_user"]=$id_user; La añadiremos cuando funcione lo de Login
 $categoria = "";
 $descripcion = "";
 $tipoPago = "";
 $precio_por_hora = "";
 $ubicacion = "";
 $disponibilidades = [];
+
 
 //Compruebo si se ha pulsado el botón del formulario
 if (!isset($_REQUEST["bAceptar"])) {
@@ -65,7 +68,7 @@ else {
         /*****
         Compuerbo si la escritura en el fichero ha ido bien
         *****/
-        registrarAltaServicio($servicio, $categoria, $descripcion, $tipoPago,$precio_por_hora, $ubicacion, $disponibilidades, $img);
+        insertarServicio($servicio, $idUser, $descripcion, $precio_por_hora,$tipoPago, $img,$errores);
 /************
 Ya no paso nada por la URL.
 Si necesito algo lo guardo en sesiones aunque en este caso no se si es necesario mostrar todos los datos del servicio creado

@@ -28,6 +28,9 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
 }
 $pdo = NULL;
 }
+function cargarUsuarios(){
+    
+}
 
 function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio, &$errores) {
     try {
@@ -61,5 +64,7 @@ function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto
     }
 }
 
+function cargarServicios($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio, &$errores){
 
+}
 ?>
