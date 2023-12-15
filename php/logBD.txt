@@ -1,1 +1,2 @@
 SQLSTATE[HY000] [2002] No such file or directory###Codigo: 2002 0.11053500 1702580344
+SQLSTATE[HY000] [2002] No such file or directory###Codigo: 2002 0.62707700 1702652760

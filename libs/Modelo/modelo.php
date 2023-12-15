@@ -28,11 +28,10 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
 $pdo = NULL;
 }
 
-function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio){
+function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio, &$errores){
     try{
         include("conexion.php");
-        $stmt = $pdo -> prepare("INSERT INTO servicios (titulo, id_user, descripcion, precio, tipo, foto_servicio) 
-        values (:titulo, :id_user, :descripcion, :precio, :tipo, :foto_servicio)");
+        $stmt = $pdo -> prepare("INSERT INTO servicios (titulo, id_user, descripcion, precio, tipo, foto_servicio) values (:titulo, :id_user, :descripcion, :precio, :tipo, :foto_servicio)");
         $stmt -> bindParam(":titulo",$titulo);
         $stmt -> bindParam(":id_user",$id_user);
         $stmt -> bindParam(":descripcion",$descripcion);
@@ -44,10 +43,11 @@ function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto
             //hacer algo
         }else{
             //hacer otra cosa
+            $errores+="Ha habido un problema en el registro";
         }
 
     }catch(PDOException $e){
-        error_log($e->getMessage()."###Codigo: ".$e->getCode()." ".microtime() . PHP_EOL, 3, "logBD.txt");
+        error_log($e->getMessage()."###Codigo: ".$e->getCode()." ".microtime() . PHP_EOL, 3, "../logBD.txt");
     }
     $pdo = NULL;
 }
