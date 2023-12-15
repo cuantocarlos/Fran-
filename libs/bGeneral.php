@@ -285,8 +285,8 @@ function cookiesObligatorios()
     }
     // si NO se ha aceptado previamente la politica de cookies
     if (!isset($_COOKIE["politicaCookies"]) || $_COOKIE["politicaCookies"] !== "aceptada") {
-        
-        include ("../templates/cookies.php");
+
+        include "../templates/cookies.php";
 
         echo '<script src="../assets/js/scriptCookies.js"></script>';
     }
@@ -341,4 +341,11 @@ function controlAcceso()
         header("location: ../php/salir.php");
     }
 
+}
+function encriptarContrasenya($pass, $cost = 10){
+    return password_hash($pass, PASSWORD_DEFAULT, ['cost' => $cost]);
+}
+
+function comprobarContrasenya($pass, $passBD){
+    password_verify($pass, $passBD);
 }
