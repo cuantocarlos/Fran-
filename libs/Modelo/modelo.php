@@ -5,8 +5,7 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
 
     try{
         include("conexion.php");
-        $stmt = $pdo -> prepare("INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo) 
-        values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripcion, :nivel, :activo)");
+        $stmt = $pdo -> prepare("INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo) VALUES (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripcion, :nivel, :activo)");
         $stmt -> bindParam(":nombre",$nombre);
         $stmt -> bindParam(":email",$email);
         $stmt -> bindParam(":pass",$pass);
