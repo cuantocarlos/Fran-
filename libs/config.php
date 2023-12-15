@@ -44,7 +44,7 @@ $tiposValidas = ["Intercambio", "Pago"];
 */
 
 $db_hostname = "localhost";
-$db_nombre = "evaluable_7W";
+$db_nombre = "evaluable_7w";
 $db_usuario = "root";
 $db_clave = "";
 
