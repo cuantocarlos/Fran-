@@ -116,10 +116,9 @@ function insertarDisponibilidad(){
     $pdo = NULL;
 }
 
-$ctl = $_GET["ctl"];
 
-if(isset($ctl)){
-    echo selectJSON($ctl);
+if(isset($_GET["ctl"])){
+    echo selectJSON($_GET["ctl"]);
 }
 
 ?>
