@@ -128,6 +128,45 @@ function insertarDisponibilidad()
     $pdo = null;
 }
 
-if (isset($_GET["ctl"])) {
-    echo selectJSON($_GET["ctl"]);
+function deleteDB($tabla, $id){
+    try{
+        include("conexion.php");
+        $stmt = $pdo -> prepare("DELETE FROM $tabla WHERE id_$tabla=:id");
+        $stmt -> bindParam(":id",$id);
+
+        if($stmt -> execute()){
+            echo "Eliminado con exito";
+        }else{
+            echo "Fallo al eliminar";
+        }
+
+    }catch(PDOException $e){
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo = NULL;
 }
+
+function insertDB($tabla, $valor){
+    try{
+        include("conexion.php");
+        $stmt = $pdo -> prepare("INSERT INTO $tabla ($tabla) VALUES (:valor)");
+        $stmt -> bindParam(":valor",$valor);
+
+        if($stmt -> execute()){
+            echo "Añadido con exito";
+        }else{
+            echo "Fallo al insertar";
+        }
+
+    }catch(PDOException $e){
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo = NULL;
+}
+
+if(isset($_GET["ctl"])){
+    
+    if($_GET["ctl"] == "select") echo selectJSON($_GET["tabla"]);
+    if($_GET["ctl"] == "delete") deleteDB($_GET["tabla"],$_GET["id"]);
+    if($_GET["ctl"] == "insert") insertDB($_GET["tabla"], $_GET["valor"]);
+ }
