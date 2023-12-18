@@ -18,6 +18,12 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
         table = document.createElement("table");
         imprimirTabla();
         select.onchange = imprimirTabla;
+
+        let btn = document.createElement("button");
+        btn.innerHTML = "Añadir";
+        btn.onclick = añadirBD;
+        select.after(btn);
+
     }
 
 
@@ -78,6 +84,20 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
             })
         }
 
+
+    function añadirBD(){
+        let valor =prompt("Inserta: ");
+        var peticion = new Request(
+            "../libs/Modelo/modelo.php?ctl=insert&tabla="+select.value+"&valor="+valor,
+            { method: "get", }
+        );
+
+        fetch(peticion)
+            .then(response => {
+                if (response.ok) imprimirTabla();
+            })
+        }
+    
 </script>
 <?php
 
