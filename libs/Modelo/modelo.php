@@ -116,9 +116,29 @@ function insertarDisponibilidad(){
     $pdo = NULL;
 }
 
+function deleteDB($tabla, $id){
+    try{
+        include("conexion.php");
+        $stmt = $pdo -> prepare("DELETE FROM $tabla WHERE id_$tabla=:id");
+        $stmt -> bindParam(":id",$id);
+
+        if($stmt -> execute()){
+            echo "Eliminado con exito";
+        }else{
+            echo "Fallo al eliminar";
+        }
+
+    }catch(PDOException $e){
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo = NULL;
+}
+
 
 if(isset($_GET["ctl"])){
-    echo selectJSON($_GET["ctl"]);
-}
+    
+    if($_GET["ctl"] == "select") echo selectJSON($_GET["tabla"]);
+    if($_GET["ctl"] == "delete") deleteDB($_GET["tabla"],$_GET["id"]);
+ }
 
 ?>
