@@ -19,6 +19,7 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
 
         if ($stmt->execute()) {
             echo ""; //Llevar a algun sitio
+
             header("location:../php/sanitLogin.php");
         } else {
             echo ""; //Llevar a otro sitio

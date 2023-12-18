@@ -49,6 +49,9 @@ else {
     }
     //Sino se han encontrado errores  guardamos el nuevo usuario y pasamos al documento con los datos validados
     if (empty($errores)) {
+
+        //encripto la contraseña 
+        $passw=encriptarContrasenya($passw);
         registrarUsuario($nombre, $correo, $passw, $fecha_de_nacimiento, $img, $desc_personal, 1, 0);
         header("location:sanitLogin.php");
     } else {
