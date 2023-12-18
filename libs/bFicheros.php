@@ -46,10 +46,7 @@ function usuarioExiste_v2(string $correo, string $contrasenya, array &$errores)
         return false;
     }
 }
-function usuarioExiste(string $correo, string $contrasenya, array &$errores)
-{
-    
-}
+
 /*
 Mejor montarlo todo en un string y lanzar solo un fwrite. Aunque le incluyamos los saltos de línea al string
  */
@@ -97,9 +94,7 @@ function mostrarTitulos()
             if (explode(":", $linea)[0] == "Servicio") {
                 echo explode(":", $linea)[1];
                 echo "<br>";
-
             }
-
         }
     }
 }

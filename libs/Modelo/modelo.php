@@ -1,12 +1,21 @@
 <?php
 //Aquí iran las funciones relacionadas con la BBDD
 
+function usuarioExiste(string $correo)
+{
+    $consulta = "SELECT * FROM 'usuario' WHERE 'email' =  :correo";
+    $stmt = $pdo->prepare($consulta);
+    $stmt->bindParam(":correo", $correo);
+    $stmt->execute();
+    $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $resultado;
+}
+
 function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $descripcion, $nivel, $activo)
 {
-
     try {
-        include("conexion.php");
-        $stmt = $pdo->prepare("INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo) 
+        include "conexion.php";
+        $stmt = $pdo->prepare("INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo)
         values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripcion, :nivel, :activo)");
         $stmt->bindParam(":nombre", $nombre);
         $stmt->bindParam(":email", $email);
@@ -28,17 +37,17 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
     } catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
-    $pdo = NULL;
+    $pdo = null;
 }
 
 function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio, &$errores)
 {
     try {
-        include("conexion.php");
+        include "conexion.php";
 
         $pdo->beginTransaction();
 
-        $stmt = $pdo->prepare("INSERT INTO servicios (titulo, id_user, descripcion, precio, tipo, foto_servicio) 
+        $stmt = $pdo->prepare("INSERT INTO servicios (titulo, id_user, descripcion, precio, tipo, foto_servicio)
         VALUES (:titulo, :id_user, :descripcion, :precio, :tipo, :foto_servicio)");
         $stmt->bindParam(":titulo", $titulo);
         $stmt->bindParam(":id_user", $id_user);
@@ -68,7 +77,7 @@ function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto
 function insertarIdioma($idioma)
 {
     try {
-        include("conexion.php");
+        include "conexion.php";
 
         $stmt = $pdo->prepare("INSERT INTO idioma (idioma) values (:idioma) ");
         $stmt->bindParam(":idioma", $idioma);
@@ -81,45 +90,44 @@ function insertarIdioma($idioma)
     } catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
-    $pdo = NULL;
+    $pdo = null;
 
 }
 
-function selectJSON($tabla){
+function selectJSON($tabla)
+{
     $consulta = "SELECT * FROM $tabla";
-    try{
-        include("conexion.php");
-        $resultado = $pdo -> prepare($consulta);
-        if($resultado -> execute()){
-           return json_encode($resultado -> fetchAll(PDO::FETCH_ASSOC));
+    try {
+        include "conexion.php";
+        $resultado = $pdo->prepare($consulta);
+        if ($resultado->execute()) {
+            return json_encode($resultado->fetchAll(PDO::FETCH_ASSOC));
         }
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
-    $pdo = NULL;
+    $pdo = null;
 }
 
-function insertarDisponibilidad(){
-    try{
-        include("conexion.php");
-        $stmt = $pdo -> prepare("INSERT INTO disponibilidad VALUES(:disponibilidad)");
-        $stmt -> bindParam(":disponibilidad",$disponibilidad);
+function insertarDisponibilidad()
+{
+    try {
+        include "conexion.php";
+        $stmt = $pdo->prepare("INSERT INTO disponibilidad VALUES(:disponibilidad)");
+        $stmt->bindParam(":disponibilidad", $disponibilidad);
 
-        if($stmt -> execute()){
+        if ($stmt->execute()) {
             // Hacer algo
-        }else{
+        } else {
             //Hacer otra cosa
         }
 
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
-    $pdo = NULL;
+    $pdo = null;
 }
 
-
-if(isset($_GET["ctl"])){
+if (isset($_GET["ctl"])) {
     echo selectJSON($_GET["ctl"]);
 }
-
-?>
