@@ -29,10 +29,50 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
     }
     $pdo = NULL;
 }
-function cargarUsuarios(){
-    
-}
+?>
+<?php
+function consultarServicios($pdo){
 
+    include('libs\config.php');
+    include('modelo\conexion.php');
+    include('modelo\consultas.php');
+
+    try{
+    $cons="SELECT titulo, descripcion, precio, tipo, foto_servicio FROM servicios";
+
+    if($res=$pdo->query($cons)){
+        $arrayres=$res->fetchAll(PDO::FETCH_ASSOC);
+        $res->closeCursor();
+        $res=null;
+        return $arrayres;
+
+    }
+    
+    if(count($arrayres)===0){?>
+    <p>No hay servicios</p>
+    <?php
+    }else {
+        foreach ($arrayres as $row) {?> 
+             Titulo: <a href="#"><?=$row['titulo']?></a> <br>
+             Descripción: <?=$row['descripcion'] ?><br>
+             Precio: <?=$row['precio']?><br>
+             Tipo: <?=$row['tipo']?> <br>
+             Foto de servicio: <?=$row['foto_servicio'] ?><br>
+             <hr><br>
+             <?
+        }
+    }
+    }catch(PDOException $e){
+
+
+        error_log($e->getMessage() . "##Código: " . $e->getCode()."  ". /*$fechaformatoddmmaaaa*/microtime()  . PHP_EOL, 3, "logBD.txt");
+        // guardamos en ·errores el error que queremos mostrar a los usuarios
+        $errores['datos'] = "Ha habido un error <br>";
+    
+    }
+}
+?>
+<?php
 function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio, &$errores)
 {
     try {
@@ -124,5 +164,5 @@ if(isset($_GET["ctl"])){
     echo selectJSON($_GET["ctl"]);
 }
 
-}
+consultarServicios($pdo);
 ?>
