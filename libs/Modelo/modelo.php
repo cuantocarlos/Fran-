@@ -165,4 +165,5 @@ if(isset($_GET["ctl"])){
 }
 
 consultarServicios($pdo);
+
 ?>
