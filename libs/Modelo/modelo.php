@@ -165,8 +165,8 @@ function insertDB($tabla, $valor){
 }
 
 if(isset($_GET["ctl"])){
-    
+
     if($_GET["ctl"] == "select") echo selectJSON($_GET["tabla"]);
     if($_GET["ctl"] == "delete") deleteDB($_GET["tabla"],$_GET["id"]);
     if($_GET["ctl"] == "insert") insertDB($_GET["tabla"], $_GET["valor"]);
- }
+}
