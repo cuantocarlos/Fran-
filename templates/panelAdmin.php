@@ -87,6 +87,7 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
 
     function añadirBD(){
         let valor =prompt("Inserta: ");
+        if (valor==null) return;
         var peticion = new Request(
             "../libs/Modelo/modelo.php?ctl=insert&tabla="+select.value+"&valor="+valor,
             { method: "get", }
