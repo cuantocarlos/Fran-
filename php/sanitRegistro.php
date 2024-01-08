@@ -1,9 +1,5 @@
 <?php
 require "../libs/config.php";
-//pongo el Mailer sin composer
-require "../libs/PHPMailer/src/PHPMailer.php";
-require "../libs/PHPMailer/src/SMTP.php";
-require "../libs/PHPMailer/src/Exception.php";
 
 cabecera("Registro");
 // array donde almacenaremos el texto de los errores encontrados
@@ -56,43 +52,11 @@ else {
 
         //encripto la contraseña
         $passw = encriptarContrasenya($passw);
+        //
         registrarUsuario($nombre, $correo, $passw, $fecha_de_nacimiento, $img, $desc_personal, 1, 0);
+        //
 
 //una vez registrado en la BD se le envia un correo de confirmacion
-
-        $mail = new PHPMailer();
-        try {
-            // Configura el servidor SMTP
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = '';
-            $mail->Password = 'losmanes-123';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-
-            // Configura los destinatarios
-            $mail->setFrom('tucorreo@gmail.com', 'Tu Nombre');
-            $mail->addAddress($correo, $nombre);
-
-// Contenido del correo
-            $mail->isHTML(true);
-            $mail->Subject = 'Este correo es para que confirmes tu registro';
-            $mail->Body = 'Haz click en este enlace para confirmar tu registro: el enlace';
-
-// Enviar el correo
-            $mail->send();
-            echo 'El correo se ha enviado con éxito.';
-        } catch (Exception $e) {
-            echo "El correo no se pudo enviar. Error: {$mail->ErrorInfo}";
-        }
-
-        //reenvio a login para que inicie sesion
-        header("location:sanitLogin.php");
-    } else {
-        //Volvemos a mostrar el formulario con errores
-        include "../templates/formRegistro.php";
     }
 }
-
 pie();

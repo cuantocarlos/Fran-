@@ -1,5 +1,40 @@
 <?php
 //Aquí iran las funciones relacionadas con la BBDD
+function insertarToken($correo)
+{
+    //genero el token que vamos a introducir
+    $token = uniqid();
+    $validez = time() * 24 * 60 * 60;
+    $id_user = sacarID_Usuario($correo);
+    try {
+        include "conexion.php";
+        $stmt = $pdo->prepare("INSERT INTO tokens (token, validez, id_user) VALUES(:token, :validez, :id_user)");
+        $stmt->bindParam(":token", $token);
+        $stmt->bindParam(":validez", $validez);
+        $stmt->bindParam(":id_user", $id_user);
+        if ($stmt->execute()) {
+            return $token;
+        }
+    } catch (\Throwable $th) {
+    }
+    $pdo = null;
+    //sin comprobar
+}
+
+function sacarID_Usuario($correo)
+{
+    $consulta = "SELECT id_user FROM usuario WHERE email=:correo";
+    try {
+        include "conexion.php";
+        $resultado = $pdo->prepare($consulta);
+        if ($resultado->execute(array(":correo" => $correo))) {
+            return $row["id_user"];
+        }
+    } catch (PDOException $e) {
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo = null;
+}
 
 function usuarioExiste(string $correo)
 {
@@ -38,6 +73,8 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
     $pdo = null;
+    $token = insertarToken($email);
+    enviarToken($email, $token);
 }
 
 function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio, &$errores)
@@ -128,45 +165,56 @@ function insertarDisponibilidad()
     $pdo = null;
 }
 
-function deleteDB($tabla, $id){
-    try{
-        include("conexion.php");
-        $stmt = $pdo -> prepare("DELETE FROM $tabla WHERE id_$tabla=:id");
-        $stmt -> bindParam(":id",$id);
+function deleteDB($tabla, $id)
+{
+    try {
+        include "conexion.php";
+        $stmt = $pdo->prepare("DELETE FROM $tabla WHERE id_$tabla=:id");
+        $stmt->bindParam(":id", $id);
 
-        if($stmt -> execute()){
+        if ($stmt->execute()) {
             echo "Eliminado con exito";
-        }else{
+        } else {
             echo "Fallo al eliminar";
         }
 
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
-    $pdo = NULL;
+    $pdo = null;
 }
 
-function insertDB($tabla, $valor){
-    try{
-        include("conexion.php");
-        $stmt = $pdo -> prepare("INSERT INTO $tabla ($tabla) VALUES (:valor)");
-        $stmt -> bindParam(":valor",$valor);
+function insertDB($tabla, $valor)
+{
+    try {
+        include "conexion.php";
+        $stmt = $pdo->prepare("INSERT INTO $tabla ($tabla) VALUES (:valor)");
+        $stmt->bindParam(":valor", $valor);
 
-        if($stmt -> execute()){
+        if ($stmt->execute()) {
             echo "Añadido con exito";
-        }else{
+        } else {
             echo "Fallo al insertar";
         }
 
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
-    $pdo = NULL;
+    $pdo = null;
 }
 
-if(isset($_GET["ctl"])){
+if (isset($_GET["ctl"])) {
 
-    if($_GET["ctl"] == "select") echo selectJSON($_GET["tabla"]);
-    if($_GET["ctl"] == "delete") deleteDB($_GET["tabla"],$_GET["id"]);
-    if($_GET["ctl"] == "insert") insertDB($_GET["tabla"], $_GET["valor"]);
+    if ($_GET["ctl"] == "select") {
+        echo selectJSON($_GET["tabla"]);
+    }
+
+    if ($_GET["ctl"] == "delete") {
+        deleteDB($_GET["tabla"], $_GET["id"]);
+    }
+
+    if ($_GET["ctl"] == "insert") {
+        insertDB($_GET["tabla"], $_GET["valor"]);
+    }
+
 }
