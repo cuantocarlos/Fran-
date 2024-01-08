@@ -92,7 +92,7 @@ function selectJSON($tabla){
         if($resultado -> execute()){
            return json_encode($resultado -> fetchAll(PDO::FETCH_ASSOC));
         }
-    }catch (PDOException $e) {
+     }catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
     $pdo = NULL;
