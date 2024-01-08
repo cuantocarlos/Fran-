@@ -1,9 +1,9 @@
 <?php
 require "../libs/config.php";
-//añado el composer
-require "../vendor/autoload.php";
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\PHPMailer;
+//pongo el Mailer sin composer
+require "../libs/PHPMailer/src/PHPMailer.php";
+require "../libs/PHPMailer/src/SMTP.php";
+require "../libs/PHPMailer/src/Exception.php";
 
 cabecera("Registro");
 // array donde almacenaremos el texto de los errores encontrados
