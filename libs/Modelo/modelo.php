@@ -7,13 +7,14 @@ function insertarToken($correo)
     $validez = time() * 24 * 60 * 60;
     $id_user = sacarID_Usuario($correo);
     try {
+        //ponemos el token en la BBDD
         include "conexion.php";
         $stmt = $pdo->prepare("INSERT INTO tokens (token, validez, id_user) VALUES(:token, :validez, :id_user)");
         $stmt->bindParam(":token", $token);
         $stmt->bindParam(":validez", $validez);
         $stmt->bindParam(":id_user", $id_user);
         if ($stmt->execute()) {
-            return $token;
+            return $token; //devolvemos el token
         }
     } catch (\Throwable $th) {
     }
@@ -34,6 +35,37 @@ function sacarID_Usuario($correo)
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
     $pdo = null;
+}
+function selectID_UserFromToken($token)
+{
+    $consulta = "SELECT id_user FROM tokens WHERE token=:token";
+    try {
+        include "conexion.php";
+        $resultado = $pdo->prepare($consulta);
+        if ($resultado->execute(array(":token" => $token))) {
+            return $row["id_user"];
+        }
+        return false;
+    } catch (PDOException $e) {
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo = null;
+} //falta comprobar tiempo
+
+function activarCuenta($id_user)
+{
+    $consulta = "UPDATE usuario SET activo = 1 WHERE id_user =:id_user";
+    try {
+        include "conexion.php";
+        $resultado = $pdo->prepare($consulta);
+        if ($resultado->execute(array(":id_user" => $id_user))) {
+            return true;
+        }
+        return false;
+    } catch (PDOException $e) {
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo=null;
 }
 
 function usuarioExiste(string $correo)
@@ -63,7 +95,8 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
 
         if ($stmt->execute()) {
             echo ""; //Llevar a algun sitio
-
+            $token = insertarToken($email);
+            include ("../enviarMail.php");
             header("location:../php/sanitLogin.php");
         } else {
             echo ""; //Llevar a otro sitio
@@ -73,8 +106,6 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
     }
     $pdo = null;
-    $token = insertarToken($email);
-    enviarToken($email, $token);
 }
 
 function insertarServicio($titulo, $id_user, $descripcion, $precio, $tipo, $foto_servicio, &$errores)
