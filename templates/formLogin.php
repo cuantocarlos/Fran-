@@ -4,6 +4,7 @@
 foreach ($errores as $error) {
     echo $error . "<br>";
 }
+
 ?>
 <h2>Inicio de Sesión</h2>
 

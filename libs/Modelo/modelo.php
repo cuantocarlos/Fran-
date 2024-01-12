@@ -29,7 +29,9 @@ function sacarID_Usuario($correo)
         include "conexion.php";
         $resultado = $pdo->prepare($consulta);
         if ($resultado->execute(array(":correo" => $correo))) {
-            return $row["id_user"];
+            foreach($resultado as $row){
+                return $row["id_user"];
+            }
         }
     } catch (PDOException $e) {
         error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
@@ -43,7 +45,9 @@ function selectID_UserFromToken($token)
         include "conexion.php";
         $resultado = $pdo->prepare($consulta);
         if ($resultado->execute(array(":token" => $token))) {
-            return $row["id_user"];
+            foreach($resultado as $row){
+                return $row["id_user"];
+            }
         }
         return false;
     } catch (PDOException $e) {
@@ -70,6 +74,7 @@ function activarCuenta($id_user)
 
 function usuarioExiste(string $correo)
 {
+    include "conexion.php";
     $consulta = "SELECT * FROM 'usuario' WHERE 'email' =  :correo";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(":correo", $correo);
