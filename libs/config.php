@@ -14,6 +14,7 @@ include "bGeneral.php";
 include "../templates/cabecera.php";
 include "../templates/pie.php";
 include "bFicheros.php";
+include "Modelo/modelo.php";
 
 
 /**
@@ -43,7 +44,7 @@ $tiposValidas = ["Intercambio", "Pago"];
 */
 
 $db_hostname = "localhost";
-$db_nombre = "evaluable_7W.sql";
+$db_nombre = "evaluable_7w";
 $db_usuario = "root";
 $db_clave = "";
 

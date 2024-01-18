@@ -8,21 +8,10 @@
 </p>
 <?php
 session_start();
-//Si no tiene acceso=1, se le lleva de vuelta a la página inicial.
-if($_SESSION["acceso"]!=1){
-    header("location:paginaInicial.php");
-}
- 
-//Control de cierre por inactividad
-if(isset($_SESSION["time"])){
-    $vidaSesion = time() - $_SESSION["time"];
 
-    if($vidaSesion > 10){
-        header("location:../php/salir.php");
-    }else{
-        $_SESSION["time"] = time();
-    }
-}
+//Control de acceso por inactividad y nivel
+
+controlAcceso();
 
 ?>
 
@@ -51,23 +40,4 @@ if(isset($_SESSION["time"])){
     Foto del servicio: <input TYPE="file" name="img_servicio" /><br>
     <input TYPE="submit" name="bAceptar" VALUE="Registrar">
 </form>
-
-<script>
-    var radio = document.getElementsByName("tipos");
-    console.log(radio);
-
-    [...radio].forEach(element => {
-        element.onclick = function(){
-            console.log(element.value);
-            if (element.value == "Pago") {
-                document.getElementsByName("precio_por_hora")[0].disabled = false;
-            } else {
-                document.getElementsByName("precio_por_hora")[0].value = "";
-                document.getElementsByName("precio_por_hora")[0].disabled = true;
-            }
-
-        }
-    });
-
-
-</script>
+ <script src="../assets/js/formAltaServicio.js"></script>

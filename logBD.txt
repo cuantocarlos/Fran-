@@ -1,0 +1,7 @@
+SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.52689900 1702653023
+SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.24001500 1702653054
+SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.34333000 1702653299
+SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.57699600 1702653341
+SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.19925300 1702653691
+SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.21169500 1702653862
+SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.92970200 1702653913

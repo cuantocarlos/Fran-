@@ -285,28 +285,10 @@ function cookiesObligatorios()
     }
     // si NO se ha aceptado previamente la politica de cookies
     if (!isset($_COOKIE["politicaCookies"]) || $_COOKIE["politicaCookies"] !== "aceptada") {
-        echo "<div id='avisoCookies' style='display:none; position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: #fff; text-align: center; padding: 10px;'>
-                <p>Esta página web utiliza cookies para su funcionamiento. <br> Al continuar navegando, acepta su uso.
-                <a href='?aceptarCookies=true' id='aceptarCookies'>Aceptar</a></p>
-              </div>";
+        
+        include ("../templates/cookies.php");
 
-        echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var avisoCookies = document.getElementById('avisoCookies');
-                    var aceptarCookies = document.getElementById('aceptarCookies');
-
-                    // Muestra el aviso si la cookie no ha sido aceptada
-                    if(avisoCookies && aceptarCookies) {
-                        avisoCookies.style.display = 'block';
-
-                        // Agrega un evento al enlace de aceptar cookies
-                        aceptarCookies.addEventListener('click', function() {
-                            // Hace una petición al mismo script con el parámetro aceptarCookies=true
-                            window.location.href = '?aceptarCookies=true';
-                        });
-                    }
-                });
-              </script>";
+        echo '<script src="../assets/js/scriptCookies.js"></script>';
     }
 }
 
@@ -345,4 +327,18 @@ function colorFondo()
         }
     }
 }
+function controlAcceso()
+{ //verifica que el que navega por la pagina contenga tiempo y renueva el tiempo, controla que se acceda con el nivel correcto
+    //Sino existe $_SESSION['acceso'] lo ponemos a 0. Será un usuario invitado
+    if (!isset($_SESSION['nivel'])) {
+        $_SESSION['nivel'] = 0;
+    }
+    //si no cumples con los requisitos de seguridad, te echa
+    if ($_SESSION['nivel'] > 0 && $_SESSION['time'] > time()) {
+        //si cumple los requisitos se renueva el tiempo
+        $_SESSION['time'] = time() + 60 * 10;
+    } else {
+        header("location: ../php/salir.php");
+    }
 
+}

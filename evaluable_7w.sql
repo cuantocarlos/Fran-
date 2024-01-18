@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2023 a las 17:02:39
+-- Servidor: localhost
+-- Tiempo de generación: 14-12-2023 a las 18:17:59
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,9 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `evaluable_7w`
 --
-CREATE DATABASE IF NOT EXISTS `evaluable_7w` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `evaluable_7w`;
-
+CREATE DATABASE IF NOT EXISTS 'evaluable_7w' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+use 'evaluable_7w';
 -- --------------------------------------------------------
 
 --
@@ -55,6 +54,17 @@ CREATE TABLE `idioma` (
   `id_idioma` int(11) NOT NULL,
   `idioma` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `idioma`
+--
+
+INSERT INTO `idioma` (`id_idioma`, `idioma`) VALUES
+(13, 'Ingles'),
+(14, 'Español'),
+(15, 'Catalan'),
+(16, 'Frances'),
+(17, 'Italiano');
 
 -- --------------------------------------------------------
 
@@ -177,7 +187,7 @@ ALTER TABLE `disponibilidad`
 -- AUTO_INCREMENT de la tabla `idioma`
 --
 ALTER TABLE `idioma`
-  MODIFY `id_idioma` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_idioma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
