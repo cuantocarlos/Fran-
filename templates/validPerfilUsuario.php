@@ -16,8 +16,8 @@ $desc_personal = recoge("desc_personal");
     <li>Nombre: <?php echo $_SESSION["nombre"] ?></li>
     <li>Apellidos: <?php echo $_SESSION["apellidos"] ?></li>
     <li>Correo: <?php echo $_SESSION["correo"] ?></li>
-    <li>Contraseña: <?php echo $new_pass ?></li>
-    <li>Imagen de perfil: <?php echo $img_perfil ?></li>
-    <li>Idioma: <?php echo $idioma ?></li>
-    <li>Descripción personal: <?php echo $desc_personal ?></li>
+    <li>Contraseña: <?php echo $_SESSION["new_pass"] ?></li>
+    <li>Imagen de perfil: <?php echo $_SESSION["img"] ?></li>
+    <li>Idioma: <?php echo $_SESSION["idioma"] ?></li>
+    <li>Descripción personal: <?php echo $_SESSION["desc_personal"] ?></li>
 </ul>
