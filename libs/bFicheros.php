@@ -46,6 +46,7 @@ function usuarioExiste_v2(string $correo, string $contrasenya, array &$errores)
         return false;
     }
 }
+
 /*
 Mejor montarlo todo en un string y lanzar solo un fwrite. Aunque le incluyamos los saltos de línea al string
  */
@@ -73,23 +74,6 @@ function registrarAltaServicio(string $servicio, string $categoria, string $desc
     }
 }
 
-// function registrarUsuario(string $correo, string $passw, string $fecha_de_nacimiento)
-// {
-//     $id = uniqid();
-
-//     if ($file = fopen("../assets/txt/usuarios.txt", "a+")) {
-//         echo $file;
-//         fwrite($file, "ID: $id" . PHP_EOL);
-//         fwrite($file, "Correo: $correo" . PHP_EOL);
-//         fwrite($file, "Contraseña: $passw" . PHP_EOL);
-//         fwrite($file, "Fecha: $fecha_de_nacimiento" . PHP_EOL);
-//         fwrite($file, "-----" . PHP_EOL);
-//         fclose($file);
-//     }
-
-//     con BBDD, borrar
-// }
-
 function mostrarServicios()
 {
     if ($file = fopen("../assets/txt/servicios.txt", "r")) {
@@ -110,9 +94,7 @@ function mostrarTitulos()
             if (explode(":", $linea)[0] == "Servicio") {
                 echo explode(":", $linea)[1];
                 echo "<br>";
-
             }
-
         }
     }
 }
