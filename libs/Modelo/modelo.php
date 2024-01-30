@@ -6,6 +6,7 @@ function insertarToken($correo)
     $token = uniqid();
     $validez = time() * 24 * 60 * 60;
     $id_user = sacarID_Usuario($correo);
+    
     try {
         //ponemos el token en la BBDD
         include "conexion.php";
@@ -75,7 +76,7 @@ function activarCuenta($id_user)
 function usuarioExiste(string $correo)
 {
     include "conexion.php";
-    $consulta = "SELECT * FROM 'usuario' WHERE 'email' =  :correo";
+    $consulta = "SELECT * FROM usuario WHERE email =  :correo";
     $stmt = $pdo->prepare($consulta);
     $stmt->bindParam(":correo", $correo);
     $stmt->execute();
@@ -99,12 +100,12 @@ function registrarUsuario($nombre, $email, $pass, $f_nacimiento, $foto_perfil, $
         $stmt->bindParam(":activo", $activo);
 
         if ($stmt->execute()) {
-            echo ""; //Llevar a algun sitio
+            echo "<script> console.log('after insertarToken()');</script>";
+            
             $token = insertarToken($email);
             include ("../enviarMail.php");
             header("location:../php/sanitLogin.php");
         } else {
-            echo ""; //Llevar a otro sitio
             header("location:../php/sanitRegistro.php");
         }
     } catch (PDOException $e) {

@@ -15,7 +15,7 @@ if (!isset($_REQUEST['bAceptar'])) {
     cPass($contrasenya, "contrasenya", $errores);
 
     //para comprobar que existe
-    $resultado = usuarioExiste($correo);
+    //$resultado = usuarioExiste($correo);
     if (empty($errores) && count($resultado) === 1) {
         $contraBBDD = $resultado[0]['pass'];
         if (comprobarContrasenya($contrasenya, $contraBBDD)) {
