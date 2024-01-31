@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `evaluable_7w`
 --
+CREATE DATABASE IF NOT EXISTS `evaluable_7w` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `evaluable_7w`;
 
 -- --------------------------------------------------------
 

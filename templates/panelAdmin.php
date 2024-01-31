@@ -18,17 +18,13 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
         imprimirTabla();
         select.onchange = imprimirTabla;
 
-        document.getElementById("añadir").onclick = añadirSQL;
-        document.getElementById("borrar").onclick = borrarSQL;
-    }
-
-    function añadirSQL(){
-
-    }
-    function borrarSQL(){
-        let seleccionados =document.getElementsByClassName("seleccion");
+        let btn = document.createElement("button");
+        btn.innerHTML = "Añadir";
+        btn.onclick = añadirBD;
+        select.after(btn);
 
     }
+
 
     function imprimirTabla() {
         var peticion = new Request(
@@ -41,14 +37,14 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
                 if (response.ok) return response.json();
             })
             .then(json => {
-                json = Object.entries(json);
                 table.innerHTML="";
+                if(json[0] == undefined) return;
+                json = Object.entries(json);
                 table.style.width = "100px";
                 table.style.border = "1px solid black";
 
 
                 var rowTitulo = table.insertRow();
-                var collCheck = rowTitulo.insertCell();
                 var titulos =Object.entries(json[1][1]);
                 titulos.forEach(element =>{
                     let cell = rowTitulo.insertCell();
@@ -57,22 +53,51 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
 
                 json.forEach(element => {
                     let row = table.insertRow();
-                    let cell = row.insertCell();
-                    let checkbox =document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.class = "seleccion";
-                    cell.appendChild(checkbox);
                     for (let key in element[1] ){
                         cell = row.insertCell();
                         cell.innerHTML = element[1][key];
                         
                     }
+                    cell = row.insertCell();
+                    let btn = document.createElement("button");
+                    btn.innerText = "x";
+                    btn.onclick = eliminarBD;
+                    btn.id = element[1]["id_"+select.value];
+                    cell.appendChild(btn);
                 });
                 select.after(table);
 
             });
 
     }
+
+    function eliminarBD(){
+        var peticion = new Request(
+            "../libs/Modelo/modelo.php?ctl=delete&tabla="+select.value+"&id="+this.id,
+            { method: "get", }
+        );
+
+        fetch(peticion)
+            .then(response => {
+                if (response.ok) imprimirTabla();
+            })
+        }
+
+
+    function añadirBD(){
+        let valor =prompt("Inserta: ");
+        if (valor==null) return;
+        var peticion = new Request(
+            "../libs/Modelo/modelo.php?ctl=insert&tabla="+select.value+"&valor="+valor,
+            { method: "get", }
+        );
+
+        fetch(peticion)
+            .then(response => {
+                if (response.ok) imprimirTabla();
+            })
+        }
+    
 </script>
 <?php
 
