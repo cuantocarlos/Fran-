@@ -7,10 +7,9 @@ cabecera("Panel de Administrador");
 
 echo '<label for="Tablas">Tablas: </label>';
 pintaSelect(["disponibilidad", "idioma"], "tablas");
-
-
 ?>
-
+<button id = "añadir">Añadir</button>
+<button id = "borrar">Borrar</button>
 <script>
     var select, table;
     window.onload = function () {
@@ -18,11 +17,22 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
         table = document.createElement("table");
         imprimirTabla();
         select.onchange = imprimirTabla;
+
+        document.getElementById("añadir").onclick = añadirSQL;
+        document.getElementById("borrar").onclick = borrarSQL;
+    }
+
+    function añadirSQL(){
+
+    }
+    function borrarSQL(){
+        let seleccionados =document.getElementsByClassName("seleccion");
+
     }
 
     function imprimirTabla() {
         var peticion = new Request(
-            "../libs/Modelo/modelo.php?ctl=" + select.value,
+            "../libs/Modelo/modelo.php?ctl=select&tabla="+select.value,
             { method: "get", }
         );
 
@@ -38,6 +48,7 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
 
 
                 var rowTitulo = table.insertRow();
+                var collCheck = rowTitulo.insertCell();
                 var titulos =Object.entries(json[1][1]);
                 titulos.forEach(element =>{
                     let cell = rowTitulo.insertCell();
@@ -46,12 +57,18 @@ pintaSelect(["disponibilidad", "idioma"], "tablas");
 
                 json.forEach(element => {
                     let row = table.insertRow();
+                    let cell = row.insertCell();
+                    let checkbox =document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.class = "seleccion";
+                    cell.appendChild(checkbox);
                     for (let key in element[1] ){
-                        let cell = row.insertCell();
+                        cell = row.insertCell();
                         cell.innerHTML = element[1][key];
+                        
                     }
                 });
-                document.body.appendChild(table);
+                select.after(table);
 
             });
 

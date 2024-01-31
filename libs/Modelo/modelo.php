@@ -84,19 +84,6 @@ function insertarIdioma($idioma)
 
 }
 
-function selectJSON($tabla){
-    $consulta = "SELECT * FROM $tabla";
-    try{
-        include("conexion.php");
-        $resultado = $pdo -> prepare($consulta);
-        if($resultado -> execute()){
-           return json_encode($resultado -> fetchAll(PDO::FETCH_ASSOC));
-        }
-    }catch (PDOException $e) {
-        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
-    }
-    $pdo = NULL;
-}
 
 function insertarDisponibilidad(){
     try{
@@ -115,10 +102,45 @@ function insertarDisponibilidad(){
     }
     $pdo = NULL;
 }
-
-
-if(isset($_GET["ctl"])){
-    echo selectJSON($_GET["ctl"]);
+function selectJSON($tabla){
+    $consulta = "SELECT * FROM $tabla";
+    try{
+        include("conexion.php");
+        $resultado = $pdo -> prepare($consulta);
+        if($resultado -> execute()){
+           return json_encode($resultado -> fetchAll(PDO::FETCH_ASSOC));
+        }
+    }catch (PDOException $e) {
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo = NULL;
 }
+
+function deleteBD($tabla){
+    try{
+        include("conexion.php");
+        $stmt = $pdo -> prepare("DELETE FROM $tabla WHERE ");
+        $stmt -> bindParam(":disponibilidad",$disponibilidad);
+
+        if($stmt -> execute()){
+            // Hacer algo
+        }else{
+            //Hacer otra cosa
+        }
+
+    }catch(PDOException $e){
+        error_log($e->getMessage() . "###Codigo: " . $e->getCode() . " " . microtime() . PHP_EOL, 3, "../logBD.txt");
+    }
+    $pdo = NULL;
+}
+
+if(isset($_GET["ctl"]) && $_GET["ctl"] == "select"){
+    echo selectJSON($_GET["tabla"]);
+}
+
+if(isset($_GET["ctl"]) && $_GET["ctl"] == "delete"){
+    deleteBD($_GET["tabla"]);
+}
+    
 
 ?>
