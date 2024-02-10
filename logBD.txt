@@ -5,3 +5,6 @@ SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.576
 SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.19925300 1702653691
 SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.21169500 1702653862
 SQLSTATE[HY000] [2002] No existe el archivo o el directorio###Codigo: 2002 0.92970200 1702653913
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'cspablo1540@gmail.com' for key 'uq_email_usuario'###Codigo: 23000 0.67655500 1705334654
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'cspablo1540@gmail.com' for key 'uq_email_usuario'###Codigo: 23000 0.23258600 1705334666
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'cspablo1540@gmail.com' for key 'uq_email_usuario'###Codigo: 23000 0.34638600 1705335159

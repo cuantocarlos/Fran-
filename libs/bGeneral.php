@@ -25,7 +25,6 @@ function recoge($var)
     } else {
         $tmp = "";
     }
-
     return $tmp;
 }
 
@@ -36,9 +35,7 @@ function recogeArray(string $var): array
         foreach ($_REQUEST[$var] as $valor) {
             $array[] = strip_tags(sinEspacios($valor));
         }
-
     }
-
     return $array;
 }
 
@@ -213,7 +210,6 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
             return false;
         }
     }
-
     return true;
 
 }
@@ -254,7 +250,6 @@ function cPass(string $contrasenya, string $campo, array &$errores, bool $requer
         $errores[$campo] = "Error en el campo $campo: la contraseña debe contener al menos un carácter especial.";
         return false;
     }
-
     return true;
 }
 
@@ -265,7 +260,6 @@ function ValidaFechaamd($fecha, array &$errores, bool $requerido = true)
     }
     $fechaArray = explode("-", $fecha);
     if ((count($fechaArray) == 3) && (checkdate($fechaArray[1], $fechaArray[2], $fechaArray[0]))) {
-
         return mktime($fechaArray[1], $fechaArray[2], $fechaArray[0]);
     } else {
         $errores["fecha"] = "La fecha no es válida";
@@ -342,10 +336,16 @@ function controlAcceso()
     }
 
 }
-function encriptarContrasenya($pass, $cost = 10){
+function encriptarContrasenya($pass, $cost = 10)
+{
     return password_hash($pass, PASSWORD_DEFAULT, ['cost' => $cost]);
 }
 
-function comprobarContrasenya($pass, $passBD){
-    password_verify($pass, $passBD);
+function comprobarContrasenya($pass, $passBD)
+{
+    return password_verify($pass, $passBD);
 }
+
+
+?>
+
