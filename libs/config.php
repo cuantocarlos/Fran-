@@ -24,7 +24,7 @@ $rutaImagenes = "../imgUsuarios/";
 /**
  * Array que guarda las extensiones válidas
  */
-$extensionesValidas = ["jpeg", "gif", "jpg", "png"];
+$extensionesValidas = ["jpeg", "gif", "jpg", "png", "webp"];
 /**
  * Tamaño máximo del fichero subido. En bytes
  */

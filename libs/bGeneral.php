@@ -343,7 +343,7 @@ function encriptarContrasenya($pass, $cost = 10)
 
 function comprobarContrasenya($pass, $passBD)
 {
-    password_verify($pass, $passBD); //revisar que funciona
+    return password_verify($pass, $passBD);
 }
 
 

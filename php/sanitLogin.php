@@ -15,10 +15,14 @@ if (!isset($_REQUEST['bAceptar'])) {
     cPass($contrasenya, "contrasenya", $errores);
 
     //para comprobar que existe
-    //$resultado = usuarioExiste($correo);
+    $resultado = usuarioExiste($correo);
     if (empty($errores) && count($resultado) === 1) {
-        $contraBBDD = $resultado[0]['pass'];
-        if (comprobarContrasenya($contrasenya, $contraBBDD)) {
+        $hashBBDD = $resultado[0]['pass'];
+        print_r($hashBBDD);
+        echo "<br>";
+        print_r($contrasenya);
+        if (comprobarContrasenya($contrasenya, $hashBBDD)) {
+            print_r("Contraseña correcta");
             //inicio sesion y redirecciono
             //$_SESSION["user"] -> Lo recogeremos cuando implantemos la BBDD.
             //$_SESSION["img"] -> Lo recogeremos cuando implantemos la BBDD.
@@ -27,6 +31,7 @@ if (!isset($_REQUEST['bAceptar'])) {
             $_SESSION['nivel'] = 1;
             $_SESSION['time'] = time() + 10 * 60;
             $_SESSION["email"] = $correo;
+            print_r($_SESSION);
             header("location:../templates/paginaPrivada.php");
         }
     } else {

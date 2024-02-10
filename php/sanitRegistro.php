@@ -55,7 +55,6 @@ else {
         //
         registrarUsuario($nombre, $correo, $passw, $fecha_de_nacimiento, $img, $desc_personal, 1, 0);
         //
-        
 
 //una vez registrado en la BD se le envia un correo de confirmacion
     }
